@@ -9,10 +9,12 @@
     "javascript"
   ],
   "author": "VACmatch",
-  "contributors": [{
-     "name": "Pablo Castro Valiño",
-     "email": "pablocastro@vacmatch.com"
-     }],
+  "contributors": [
+    {
+      "name": "Pablo Castro Valiño",
+      "email": "pablocastro@vacmatch.com"
+    }
+  ],
   "license": "AGPLv3",
   "repository": {
     "type": "git",
@@ -40,6 +42,7 @@
   "dependencies": {
     "gulp-install": "^0.4.0",
     "react": "^0.13.3",
+    "react-router": "^0.13.3",
     "reflux": "^0.2.11"
   }
 }

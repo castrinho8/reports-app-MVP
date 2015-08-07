@@ -1,6 +1,8 @@
 import React from 'react';
 import mui from 'material-ui';
 
+let centerListStyle = require('../../../assets/componentStyle/centerListStyle.js')
+
 let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors,
    TextField = mui.TextField,
@@ -19,13 +21,9 @@ let Login = React.createClass( {
      };
    },
 
-   onClick: function() {
-      alert("eee")
-   },
-
   render() {
       return (
-      <div>
+      <div style={centerListStyle}>
          <p>
             <Avatar src='assets/img/vacmatch.png' size='100' />
          </p>
@@ -40,7 +38,7 @@ let Login = React.createClass( {
                floatingLabelText="Password" />
          </p>
          <p>
-            <FlatButton label="Accept" primary={true} onClick={this.onClick.bind(this)}/>
+            <FlatButton label="Accept" primary={true} />
          </p>
       </div>
     )

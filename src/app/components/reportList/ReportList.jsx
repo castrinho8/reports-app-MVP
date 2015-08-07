@@ -2,7 +2,7 @@ import React from 'react';
 import mui from 'material-ui';
 
 // Styles
-let centerListStyle = require('/static/componentStyle/centerListStyle.js')
+let centerListStyle = require('../../../assets/componentStyle/centerListStyle.js')
 
 // Components
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -31,8 +31,8 @@ let ReportList = React.createClass( {
             <ListItem class="list-center"
                primaryText="Local - Visitante"
                secondaryText="0 - 0"
-               leftAvatar={<Avatar src="./static/img/vacmatch.png" />}
-               rightAvatar={<Avatar src="./static/img/vacmatch.png" />} >
+               leftAvatar={<Avatar src="assets/img/vacmatch.png" />}
+               rightAvatar={<Avatar src="assets/img/vacmatch.png" />} >
             </ListItem>
             <ListItem></ListItem>
             <ListItem></ListItem>
