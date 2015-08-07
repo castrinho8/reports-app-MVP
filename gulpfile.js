@@ -49,7 +49,7 @@ gulp.task('clean', function (){
 })
 
 gulp.task('watch', function() {
-  gulp.watch(['./src/index.html', './src/app/**/*.jsx'], ['build'])
+  gulp.watch(['./src/**/*'], ['build'])
   gulp.watch('./src/app/assets/**/*', ['stylus'])
 })
 
