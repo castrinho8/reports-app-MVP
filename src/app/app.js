@@ -4,6 +4,7 @@ import ReportList from './components/reportList/ReportList.jsx'
 import Report from './components/report/Report.jsx'
 import PlayerList from './components/playerList/PlayerList.jsx'
 import EventList from './components/event/eventList/EventList.jsx'
+import PlayerCallList from './components/playerCallList/PlayerCallList.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { default as Router, Route } from 'react-router';
 import mui from 'material-ui';
@@ -31,7 +32,8 @@ let menuItems = [
    { type: MenuItem.Types.LINK, payload: '/report-list', text: 'Report List' },
    { type: MenuItem.Types.LINK, payload: '/report', text: 'Report' },
    { type: MenuItem.Types.LINK, payload: '/player-list', text: 'Player List' },
-   { type: MenuItem.Types.LINK, payload: '/event-list', text: 'Event List' }
+   { type: MenuItem.Types.LINK, payload: '/event-list', text: 'Event List' },
+   { type: MenuItem.Types.LINK, payload: '/player-call-list', text: 'Call List' }
 ]
 
 /*
@@ -71,6 +73,7 @@ let routes = <Route handler={ReportsApp}>
    <Route path="report" handler={Report} />
    <Route path="player-list" handler={PlayerList} />
    <Route path="event-list" handler={EventList} />
+   <Route path="player-call-list" handler={PlayerCallList} />
    <DefaultRoute handler={Login}/>
 </Route>
 
