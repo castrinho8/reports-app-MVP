@@ -26,41 +26,39 @@ let Report = React.createClass( {
                   <div>
                      <div>
                         <span>
-                           <Avatar src="assets/img/vacmatch.png"/>
+                           <Avatar style={style.div} src="assets/img/teams/team1.jpg"/>
                         </span>
-                        <FlatButton label="Greenpeace FC" secondary={true} />
+                        <span>
+                           <a href="/player-call-list">
+                              <FlatButton label="Greenpeace FC" secondary={true} />
+                           </a>
+                        </span>
                         <FlatButton label="Bens" secondary={true} />
                         <span>
-                           <Avatar src="assets/img/vacmatch.png"/>
+                           <Avatar style={style.div} src="assets/img/vacmatch.png"/>
                         </span>
                      </div>
                      <h1>1 - 0</h1>
-                     <div>
-                        <small>Faltas</small>
-                        <br/>
-                        <small><i>4 - 2</i></small>
-                     </div>
                      <p>
-                        <p>11:22</p>
                         <p>
                            <DropDownMenu menuItems={periodItems} />
                         </p>
-                        <FlatButton label="Events" secondary={true} />
+                        <a href="/event-list"><FlatButton label="Events" secondary={true} /></a>
                      </p>
                   </div>
                   <hr/>
-                  <p>
-                     <RaisedButton primary={true} >
-                        <FontIcon className="fa fa-play" />
-                     </RaisedButton>
-                  </p>
                   <div style={style.div}>
-                     <RaisedButton style={style.button} label="Goal" />
+                     <a href="/goal-list"><RaisedButton style={style.button} label="Goal" /></a>
                      <RaisedButton style={style.button} label="Foul" />
                   </div>
                   <div style={style.div}>
-                     <RaisedButton style={style.button} label="Yellow Card" />
+                     <a href="/foul-list"><RaisedButton style={style.button} label="Yellow Card" /></a>
                      <RaisedButton style={style.button} label="Red Card" />
+                  </div>
+                  <div style={style.div}>
+                     <a href="/end-game">
+                        <RaisedButton primary={true} label="End game"/>
+                     </a>
                   </div>
                </div>
       }

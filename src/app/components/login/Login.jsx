@@ -38,7 +38,7 @@ let Login = React.createClass( {
                floatingLabelText="Password" />
          </p>
          <p>
-            <FlatButton label="Accept" primary={true} />
+            <a href="/report-list"><FlatButton label="Accept" primary={true} /></a>
          </p>
       </div>
     )

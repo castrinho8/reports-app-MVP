@@ -30,7 +30,7 @@ let PendingList = React.createClass( {
                   return <ListItem class="list-center"
                      primaryText={ match.local + ' - ' + match.visitor }
                      secondaryText={ match.time + ' - ' + match.place }
-                     leftAvatar={<Avatar src= { match.localAvatarUrl } />}
+                     leftAvatar={<a href="/report"><Avatar src= { match.localAvatarUrl } /></a>}
                      rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
                })
             }

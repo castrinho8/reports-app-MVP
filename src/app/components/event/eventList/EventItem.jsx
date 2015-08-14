@@ -9,12 +9,10 @@ let MenuItem = require('material-ui/lib/menus/menu-item');
 let IconMenu = mui.IconMenu,
    IconButton = mui.IconButton,
    ListItem = mui.ListItem,
-   Dialog = mui.Dialog;
+   Dialog = mui.Dialog,
+   FlatButton = mui.FlatButton;
 
-let standardActions = [
-  {text: 'Cancel'},
-  {text: 'Accept'}
-]
+let standardActions = []
 
 let EventItem = React.createClass( {
 
@@ -48,10 +46,22 @@ let EventItem = React.createClass( {
                 title="Remove event"
                 actions={standardActions}
                 actionFocus="submit"
-                modal="false">
+                modal={false}>
                 <p>
                    Are you sure to remove this event?
                 </p>
+                <div>
+                  <FlatButton
+                     label="Cancel"
+                     secondary={true}
+                     linkButton={true}
+                     />
+                  <FlatButton
+                     label="Accept"
+                     secondary={true}
+                     linkButton={true}
+                     href="/report" />
+               </div>
                </Dialog>
             </ListItem>
          </div>

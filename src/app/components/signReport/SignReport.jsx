@@ -26,7 +26,7 @@ let SignReport = React.createClass( {
              title="Sign"
              actions={standardActions}
              actionFocus="submit"
-             modal="false">
+             modal={false}>
              <hr/>
              <div>
                 <DropDownMenu menuItems={this.props.players} />
