@@ -16,8 +16,8 @@ let PendingList = React.createClass( {
 
    componentWillMount: function() {
       this.elements = [
-         {local: 'Libertad', visitor: 'Greenpeace FC', time: '21 January / 22:00', place: 'O Castrillón', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Castrillón', visitor: 'Bens', time: '1 February / 22:00', place: 'Bens', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'}
+         {local: 'Libertad', visitor: 'Greenpeace FC', time: '21 Enero / 22:00', place: 'O Castrillón', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
+         {local: 'Castrillón', visitor: 'Bens', time: '1 Febrero / 22:00', place: 'Bens', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'}
       ]
    },
 

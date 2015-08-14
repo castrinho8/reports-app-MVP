@@ -32,22 +32,22 @@ let GoalEvent = React.createClass( {
       return (
          <div>
             <Dialog ref="goalEvent"
-             title="Goal"
+             title="Gol"
              actions={standardActions}
              actionFocus="submit"
              modal={false}>
              <hr/>
              <p>
-                Are you sure to add a goal to {this.props.player.name} number {this.props.player.number}?
+                ¿Está seguro de añadir un Gol a {this.props.player.name} con número {this.props.player.number}?
              </p>
              <div>
                <FlatButton
-                  label="Cancel"
+                  label="Cancelar"
                   secondary={true}
                   linkButton={true}
                   />
                <FlatButton
-                  label="Accept"
+                  label="Aceptar"
                   secondary={true}
                   linkButton={true}
                   href="/report" />

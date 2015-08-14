@@ -14,8 +14,8 @@ let RaisedButton = mui.RaisedButton,
    Dialog = mui.Dialog;
 
 let periodItems = [
-   { payload: '1', text: '1º period' },
-   { payload: '2', text: '2º period' }
+   { payload: '1', text: '1ª parte' },
+   { payload: '2', text: '2ª parte' }
 ]
 
 
@@ -43,21 +43,21 @@ let Report = React.createClass( {
                         <p>
                            <DropDownMenu menuItems={periodItems} />
                         </p>
-                        <a href="/event-list"><FlatButton label="Events" secondary={true} /></a>
+                        <a href="/event-list"><FlatButton label="Eventos" secondary={true} /></a>
                      </p>
                   </div>
                   <hr/>
                   <div style={style.div}>
-                     <a href="/goal-list"><RaisedButton style={style.button} label="Goal" /></a>
-                     <RaisedButton style={style.button} label="Foul" />
+                     <a href="/goal-list"><RaisedButton style={style.button} label="Gol" /></a>
+                     <RaisedButton style={style.button} label="Falta" />
                   </div>
                   <div style={style.div}>
-                     <a href="/foul-list"><RaisedButton style={style.button} label="Yellow Card" /></a>
-                     <RaisedButton style={style.button} label="Red Card" />
+                     <a href="/foul-list"><RaisedButton style={style.button} label="Tarjeta Amarilla" /></a>
+                     <RaisedButton style={style.button} label="Tarjeta Roja" />
                   </div>
                   <div style={style.div}>
                      <a href="/end-game">
-                        <RaisedButton primary={true} label="End game"/>
+                        <RaisedButton primary={true} label="Terminar partido"/>
                      </a>
                   </div>
                </div>

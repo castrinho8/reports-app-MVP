@@ -43,21 +43,21 @@ let EventItem = React.createClass( {
                   <IconButton iconClassName="fa fa-trash-o" onClick={this.handleRemove}/></div>
                }>
                <Dialog ref="removeEvent"
-                title="Remove event"
+                title="Eliminar evento"
                 actions={standardActions}
                 actionFocus="submit"
                 modal={false}>
                 <p>
-                   Are you sure to remove this event?
+                   Está seguro de borrar este evento?
                 </p>
                 <div>
                   <FlatButton
-                     label="Cancel"
+                     label="Cancelar"
                      secondary={true}
                      linkButton={true}
                      />
                   <FlatButton
-                     label="Accept"
+                     label="Aceptar"
                      secondary={true}
                      linkButton={true}
                      href="/report" />

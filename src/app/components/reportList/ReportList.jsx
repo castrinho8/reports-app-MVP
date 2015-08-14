@@ -11,10 +11,10 @@ let ReportList = React.createClass( {
   render() {
       return (
          <Tabs>
-            <Tab label="Next games">
+            <Tab label="Pendientes">
                <PendingList/>
             </Tab>
-            <Tab label="Finished">
+            <Tab label="Terminados">
                <FinishedList/>
             </Tab>
          </Tabs>

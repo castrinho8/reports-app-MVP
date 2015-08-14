@@ -39,11 +39,11 @@ let EndGame = React.createClass( {
       return (
          <div>
             <Tabs>
-               <Tab label="Referee">
+               <Tab label="Árbitro">
                   <div style={style.center}>
                      <TextField
-                        floatingLabelText="Incidences"
-                        hintText="Write incidences"
+                        floatingLabelText="Incidencias"
+                        hintText="Escriba las incidencias"
                         multiLine={true} />
                   </div>
                   <div>
@@ -53,7 +53,7 @@ let EndGame = React.createClass( {
                <Tab label="Local">
                   <SignReport style={style} players={this.locals}/>
                </Tab>
-               <Tab label="Visitor">
+               <Tab label="Visitante">
                   <SignReport style={style} players={this.visitors}/>
                </Tab>
             </Tabs>

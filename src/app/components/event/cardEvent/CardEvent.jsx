@@ -14,10 +14,10 @@ let Dialog = mui.Dialog,
 let standardActions = []
 
 let reasonItems = [
-   { payload: '1', text: 'Soft foul' },
-   { payload: '2', text: 'Insult' },
-   { payload: '3', text: 'Aggression' },
-   { payload: '4', text: 'Kick without the ball' },
+   { payload: '1', text: 'Falta leve' },
+   { payload: '2', text: 'Insulto' },
+   { payload: '3', text: 'Agresión' },
+   { payload: '4', text: 'Patada sin balón' },
 ]
 
 let CardEvent = React.createClass( {
@@ -41,27 +41,27 @@ let CardEvent = React.createClass( {
       return (
          <div>
             <Dialog ref="cardEvent"
-             title="Yellow Card"
+             title="Tarjeta amarilla"
              actions={standardActions}
              actionFocus="submit"
              modal={false}>
              <hr/>
              <p>
-                Are you sure to add a Yellow Card to {this.props.player.name} number {this.props.player.number}?
+                ¿Está seguro de añadir una Tarjeta Amarilla a {this.props.player.name} con número {this.props.player.number}?
              </p>
-             <p><b>Select reason</b></p>
+             <p><b>Motivo</b></p>
              <DropDownMenu menuItems={reasonItems} />
              <TextField
-               hintText="Write a new reason"
-               floatingLabelText="Other reason" />
+               hintText="Selecciona un motivo"
+               floatingLabelText="Otro motivo" />
             <div>
               <FlatButton
-                 label="Cancel"
+                 label="Cancelar"
                  secondary={true}
                  linkButton={true}
                  />
               <FlatButton
-                 label="Accept"
+                 label="Aceptar"
                  secondary={true}
                  linkButton={true}
                  href="/report" />

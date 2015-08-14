@@ -10,11 +10,6 @@ let Dialog = mui.Dialog,
    Tabs = mui.Tabs,
    Tab = mui.Tab;
 
-let standardActions = [
-   {text: 'Cancel'},
-   {text: 'Accept'}
-]
-
 let PlayerList = React.createClass( {
 
    locals: [],
@@ -53,7 +48,7 @@ let PlayerList = React.createClass( {
       return (
          <div>
             <Tabs>
-               <Tab label="Local team">
+               <Tab label="Greenpeace FC">
                   <List>
                      {
                         this.locals.map( player => {
@@ -62,7 +57,7 @@ let PlayerList = React.createClass( {
                      }
                   </List>
                </Tab>
-               <Tab label="Visitor team">
+               <Tab label="Bens">
                   <List>
                      {
                         this.visitors.map( player => {

@@ -8,8 +8,8 @@ let Dialog = mui.Dialog,
    RaisedButton = mui.RaisedButton;
 
 let standardActions = [
-  {text: 'Cancel'},
-  {text: 'Sign'}
+  {text: 'Cancelar'},
+  {text: 'Firmar'}
 ]
 
 let SignReport = React.createClass( {
@@ -23,7 +23,7 @@ let SignReport = React.createClass( {
       return (
          <div>
             <Dialog ref="signEvent"
-             title="Sign"
+             title="Firmar"
              actions={standardActions}
              actionFocus="submit"
              modal={false}>
@@ -31,12 +31,12 @@ let SignReport = React.createClass( {
              <div>
                 <DropDownMenu menuItems={this.props.players} />
                 <TextField
-                   floatingLabelText="Key"
-                   hintText="Write your key"
+                   floatingLabelText="Clave"
+                   hintText="Escriba su clave"
                    type="password" />
              </div>
             </Dialog>
-            <RaisedButton label="Sign this report" style={this.props.style.signButton}
+            <RaisedButton label="Firmar" style={this.props.style.signButton}
                secondary={true} onClick={this.handleClick}/>
          </div>
     )

@@ -26,7 +26,7 @@ let PlayerCallList = React.createClass( {
   render: function() {
      return(
         <Card>
-           <CardMedia overlay={<CardTitle title="Greenpeace FC " subtitle="Call list"/>}>
+           <CardMedia overlay={<CardTitle title="Greenpeace FC " subtitle="Convocados"/>}>
              <img src="assets/img/teams/team1.jpg" height="50%"/>
            </CardMedia>
            <List>
