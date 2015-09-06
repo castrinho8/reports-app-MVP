@@ -30,10 +30,6 @@ let SignReport = React.createClass( {
              <hr/>
              <div>
                 <DropDownMenu menuItems={this.props.players} />
-                <TextField
-                   floatingLabelText="Key"
-                   hintText="Write your key"
-                   type="password" />
              </div>
             </Dialog>
             <RaisedButton label="Sign this report" style={this.props.style.signButton}

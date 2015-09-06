@@ -5,10 +5,7 @@ import EventItem from './EventItem'
 // Components
 let List = mui.List,
    ListDivider = mui.ListDivider,
-   ListItem = mui.ListItem,
-   Card = mui.Card,
-   CardMedia = mui.CardMedia,
-   CardTitle = mui.CardTitle;
+   ListItem = mui.ListItem;
 
 let EventList = React.createClass( {
 
@@ -36,26 +33,21 @@ let EventList = React.createClass( {
 
       return (
          <div>
-            <Card>
-               <CardMedia overlay={<CardTitle title="Events" subtitle="Greenpeace FC - Bens"/>}>
-                  <img src="http://lorempixel.com/400/200/sports/" height="50%"/>
-               </CardMedia>
-               <List subheader="Second Period">
-                  {
-                     this.state.secondPeriod.map( player => {
-                        return <EventItem player={player} />
-                     })
-                  }
-               </List>
-               <ListDivider />
-               <List subheader="First Period">
-                  {
-                     this.state.firstPeriod.map( player => {
-                        return <EventItem player={player} />
-                     })
-                  }
-               </List>
-            </Card>
+            <List subheader="Second Period">
+               {
+                  this.state.secondPeriod.map( player => {
+                     return <EventItem player={player} />
+                  })
+               }
+            </List>
+            <ListDivider />
+            <List subheader="First Period">
+               {
+                  this.state.firstPeriod.map( player => {
+                     return <EventItem player={player} />
+                  })
+               }
+            </List>
          </div>
       )
   }

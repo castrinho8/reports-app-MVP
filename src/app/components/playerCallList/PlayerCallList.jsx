@@ -5,7 +5,6 @@ import PlayerCallItem from './PlayerCallItem'
 // Components
 let List = mui.List,
    Card = mui.Card,
-   CardMedia = mui.CardMedia,
    CardTitle = mui.CardTitle;
 
 let PlayerCallList = React.createClass( {
@@ -26,9 +25,7 @@ let PlayerCallList = React.createClass( {
   render: function() {
      return(
         <Card>
-           <CardMedia overlay={<CardTitle title="Greenpeace FC " subtitle="Call list"/>}>
-             <img src="assets/img/teams/team1.jpg" height="50%"/>
-           </CardMedia>
+           <CardTitle title="Greenpeace FC" subtitle="Call up list"/>
            <List>
              {
                 this.players.map( player => {

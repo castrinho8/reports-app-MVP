@@ -2,7 +2,7 @@ import React from 'react';
 import mui from 'material-ui';
 
 // Style import
-import centerListStyle from '../../../assets/componentStyle/centerListStyle.js'
+import coreStyle from '../../../assets/componentStyle/coreStyle.js'
 import style from './reportStyle.js'
 
 // Components
@@ -22,7 +22,7 @@ let periodItems = [
 let Report = React.createClass( {
 
    render: function() {
-         return <div style={centerListStyle}>
+         return <div style={coreStyle.center}>
                   <div>
                      <div>
                         <span>
@@ -41,7 +41,6 @@ let Report = React.createClass( {
                         <small><i>4 - 2</i></small>
                      </div>
                      <p>
-                        <p>11:22</p>
                         <p>
                            <DropDownMenu menuItems={periodItems} />
                         </p>

@@ -2,7 +2,7 @@ import React from 'react';
 import mui from 'material-ui';
 
 // Styles
-let centerListStyle = require('../../../assets/componentStyle/centerListStyle.js')
+let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
 
 // Components
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -24,7 +24,7 @@ let PendingList = React.createClass( {
   render() {
 
       return (
-         <List style={centerListStyle}>
+         <List style={coreStyle.center}>
             {
                this.elements.map( match => {
                   return <ListItem class="list-center"

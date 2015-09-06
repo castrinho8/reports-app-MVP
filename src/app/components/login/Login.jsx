@@ -1,7 +1,7 @@
 import React from 'react';
 import mui from 'material-ui';
 
-let centerListStyle = require('../../../assets/componentStyle/centerListStyle.js')
+let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
 
 let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors,
@@ -23,7 +23,7 @@ let Login = React.createClass( {
 
   render() {
       return (
-      <div style={centerListStyle}>
+      <div style={coreStyle.center}>
          <p>
             <Avatar src='assets/img/vacmatch.png' size='100' />
          </p>
