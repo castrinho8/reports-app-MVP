@@ -1,4 +1,5 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 
 // Styles
@@ -12,28 +13,20 @@ let List = mui.List,
 
 let PendingList = React.createClass( {
 
-   elements: [],
-
-   componentWillMount: function() {
-      this.elements = [
-         {local: 'Libertad', visitor: 'Greenpeace FC', time: '21 January / 22:00', place: 'O Castrillón', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Castrillón', visitor: 'Bens', time: '1 February / 22:00', place: 'Bens', localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'}
-      ]
-   },
-
-  render() {
-
+  render: function() {
+      var content = <p>Loading...</p>
+      if (this.props.list) {
+         content = this.props.list.map( match => {
+            return <ListItem class="list-center"
+               primaryText={ match.local + ' - ' + match.visitor }
+               secondaryText={ match.time + ' - ' + match.place }
+               leftAvatar={<Avatar src= { match.localAvatarUrl } />}
+               rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
+         })
+      }
       return (
          <List style={coreStyle.center}>
-            {
-               this.elements.map( match => {
-                  return <ListItem class="list-center"
-                     primaryText={ match.local + ' - ' + match.visitor }
-                     secondaryText={ match.time + ' - ' + match.place }
-                     leftAvatar={<Avatar src= { match.localAvatarUrl } />}
-                     rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
-               })
-            }
+            {content}
          </List>
     )
   }

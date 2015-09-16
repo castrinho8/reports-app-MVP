@@ -1,4 +1,5 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 
 // Styles
@@ -12,31 +13,20 @@ let List = mui.List,
 
 let FinishedList = React.createClass( {
 
-   elements: [],
-
-   componentWillMount: function() {
-      this.elements = [
-         {local: 'Libertad', visitor: 'Greenpeace FC', localGoals: 1, visitorGoals: 2, localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Castrillón', visitor: 'Somos Nós FC', localGoals: 0, visitorGoals: 4, localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Bens FC', visitor: 'MoMa Bar', localGoals: 1, visitorGoals: 1, localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Os codillos', visitor: 'Chiquitín', localGoals: 3, visitorGoals: 2, localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-         {local: 'Portagal', visitor: 'Caronium', localGoals: 2, visitorGoals: 2, localAvatarUrl:'assets/img/vacmatch.png', visitorAvatarUrl:'assets/img/vacmatch.png'},
-      ]
-   },
-
-  render() {
-
+  render: function() {
+     var content = <p>Loading...</p>
+     if (this.props.list) {
+        content = this.props.list.map( match => {
+           return <ListItem class="list-center"
+             primaryText={ match.local + ' - ' + match.visitor }
+             secondaryText={ match.localResult + ' - ' + match.visitorResult }
+             leftAvatar={<Avatar src= { match.localAvatarUrl } />}
+             rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
+        })
+     }
       return (
          <List style={coreStyle.center}>
-            {
-               this.elements.map( match => {
-                  return <ListItem class="list-center"
-                     primaryText={ match.local + ' - ' + match.visitor }
-                     secondaryText={ match.localGoals + ' - ' + match.visitorGoals }
-                     leftAvatar={<Avatar src= { match.localAvatarUrl } />}
-                     rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
-               })
-            }
+            {content}
          </List>
     )
   }

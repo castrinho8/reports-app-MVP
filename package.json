@@ -43,6 +43,7 @@
     "gulp-install": "^0.4.0",
     "react": "^0.13.3",
     "react-router": "^0.13.3",
-    "reflux": "^0.2.11"
+    "reflux": "^0.2.11",
+    "superagent": "^1.3.0"
   }
 }
