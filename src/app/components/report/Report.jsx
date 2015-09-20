@@ -1,9 +1,17 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
+import ReportStore from '../../stores/report/ReportStore.jsx'
+import ReportActions from '../../actions/report/ReportActions.jsx'
+import ReportsAPI from '../../api/report/ReportsAPI.js'
+import EventsAPI from '../../api/event/EventsAPI.js'
+import EndGameAPI from '../../api/endGame/EndGameAPI.js'
 
 // Style import
 import coreStyle from '../../../assets/componentStyle/coreStyle.js'
 import style from './reportStyle.js'
+
+let ThemeManager = new mui.Styles.ThemeManager();
 
 // Components
 let RaisedButton = mui.RaisedButton,
@@ -18,49 +26,66 @@ let periodItems = [
    { payload: '2', text: '2º period' }
 ]
 
+const Report = React.createClass( {
+    mixins: [Reflux.connect(ReportStore, "report")],
 
-let Report = React.createClass( {
+    childContextTypes: {
+      muiTheme: React.PropTypes.object
+    },
 
-   render: function() {
+    getChildContext: function() {
+      return {
+        muiTheme: ThemeManager.getCurrentTheme()
+      };
+    },
+
+    componentWillMount: function() {
+      ReportActions.updateReport(this.props.params.reportId)
+    },
+
+    render: function() {
          return <div style={coreStyle.center}>
                   <div>
                      <div>
                         <span>
-                           <Avatar src="assets/img/vacmatch.png"/>
+                           <Avatar src={this.state.report.localAvatarUrl}/>
                         </span>
-                        <FlatButton label="Greenpeace FC" secondary={true} />
-                        <FlatButton label="Bens" secondary={true} />
+                        <FlatButton label={this.state.report.localTeam} linkButton={true} href={ReportsAPI.getPlayersListUrl(this.state.report.id)} secondary={true} />
+                        <FlatButton label={this.state.report.visitorTeam} linkButton={true} href={ReportsAPI.getPlayersListUrl(this.state.report.id)}  secondary={true} />
                         <span>
-                           <Avatar src="assets/img/vacmatch.png"/>
+                           <Avatar src={this.state.report.visitorAvatarUrl}/>
                         </span>
                      </div>
-                     <h1>1 - 0</h1>
+                     <h1>{this.state.report.localResult} - {this.state.report.visitorResult}</h1>
                      <div>
                         <small>Faltas</small>
                         <br/>
-                        <small><i>4 - 2</i></small>
+                        <small><i>{this.state.report.localFouls} - {this.state.report.visitorFouls}</i></small>
                      </div>
                      <p>
                         <p>
                            <DropDownMenu menuItems={periodItems} />
                         </p>
-                        <FlatButton label="Events" secondary={true} />
+                        <FlatButton label="Events" linkButton={true} href={EventsAPI.getEventListUrl(this.state.report.id)}  secondary={true} />
                      </p>
                   </div>
                   <hr/>
+                  <div style={style.div}>
+                     <RaisedButton style={style.button} label="Goal"
+                         linkButton={true} href={EventsAPI.getGoalUrl(this.state.report.id)} />
+                     <RaisedButton style={style.button} label="Foul"
+                         linkButton={true} href={EventsAPI.getFoulUrl(this.state.report.id)} />
+                  </div>
+                  <div style={style.div}>
+                     <RaisedButton style={style.button} label="Yellow Card"
+                         linkButton={true} href={EventsAPI.getYellowCardUrl(this.state.report.id)} />
+                     <RaisedButton style={style.button} label="Red Card"
+                         linkButton={true} href={EventsAPI.getRedCardUrl(this.state.report.id)} />
+                  </div>
                   <p>
-                     <RaisedButton primary={true} >
-                        <FontIcon className="fa fa-play" />
-                     </RaisedButton>
+                     <RaisedButton primary={true} label="End game"
+                         linkButton={true} href={EndGameAPI.getEndGameUrl(this.state.report.id)} />
                   </p>
-                  <div style={style.div}>
-                     <RaisedButton style={style.button} label="Goal" />
-                     <RaisedButton style={style.button} label="Foul" />
-                  </div>
-                  <div style={style.div}>
-                     <RaisedButton style={style.button} label="Yellow Card" />
-                     <RaisedButton style={style.button} label="Red Card" />
-                  </div>
                </div>
       }
 });

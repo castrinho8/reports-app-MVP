@@ -2,7 +2,8 @@ import Reflux from 'reflux';
 
 let ReportListActions = Reflux.createActions([
     'updateNextGamesList',
-    'updateFinishedGamesList'
+    'updateFinishedGamesList',
+    'updateReport'
     ]);
 
 module.exports = ReportListActions;
