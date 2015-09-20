@@ -7,10 +7,9 @@ import EventList from './components/event/eventList/EventList.jsx'
 import PlayerCallList from './components/playerCallList/PlayerCallList.jsx'
 import EndGame from './components/endGame/EndGame.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin'
-import { default as Router, Route } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 import mui from 'material-ui';
 
-let DefaultRoute = Router.DefaultRoute;
 let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors,
       AppBar = mui.AppBar,
@@ -22,8 +21,6 @@ let Colors = mui.Styles.Colors,
 //Check this repo:
 //https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
-
-let RouteHandler = Router.RouteHandler;
 
 /*
  * Elements in Left Nav
@@ -63,11 +60,29 @@ let ReportsApp = React.createClass( {
            title="VACmatch"
            iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this._handleTouchTap}/>
          <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
-         <RouteHandler />
+         {this.props.children}
       </div>
    }
 })
 
+React.render((
+    <Router>
+        <Route path="/" component={ReportsApp}>
+            <IndexRoute component={Login} />
+            <Route path="login" component={Login} />
+            <Route path="report-list" component={ReportList} />
+            <Route path="report/:reportId" component={Report} />
+            <Route path="player-list/:reportId" component={PlayerList} />
+            <Route path="event-list/:reportId" component={EventList} />
+            <Route path="player-call-list/:reportId" component={PlayerCallList} />
+            <Route path="end-game/:reportId" component={EndGame} />
+            <Route path="*" component={Login} />
+        </Route>
+    </Router>
+), document.getElementById('container'));
+
+
+/*
 // Routes
 let routes = <Route handler={ReportsApp}>
    <Route path="login" handler={Login} />
@@ -82,4 +97,4 @@ let routes = <Route handler={ReportsApp}>
 
 Router.run(routes, Router.HistoryLocation, (Root) => {
    React.render(<Root />, document.getElementById('container'));
-});
+});*/
