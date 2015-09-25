@@ -20,6 +20,17 @@ let API = {
         .end((err, res) => {
             callback(err, res);
         });
+    },
+
+    put: function(url, params, callback) {
+        request
+        .put(url)
+        .send(params)
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+            callback(err, res);
+        });
     }
 
 }

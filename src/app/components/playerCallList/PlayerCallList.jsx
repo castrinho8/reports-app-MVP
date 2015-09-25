@@ -1,41 +1,47 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 import PlayerCallItem from './PlayerCallItem'
+import PlayerCallStore from '../../stores/playerCallList/PlayerCallStore'
+import ReportActions from '../../actions/report/ReportActions.jsx'
 
 // Components
 let List = mui.List,
    Card = mui.Card,
    CardTitle = mui.CardTitle;
+let ThemeManager = new mui.Styles.ThemeManager();
 
 let PlayerCallList = React.createClass( {
+    mixins: [Reflux.connect(PlayerCallStore, "playerList")],
 
-   players: [],
+    childContextTypes: {
+     muiTheme: React.PropTypes.object
+    },
 
-   componentWillMount: function() {
-      // Sample data
-      this.players = [
-         {number: 1, name: 'John Bruce', avatarUrl:'assets/img/players/player1.png'},
-         {number: 2, name: 'Fulano Detal', avatarUrl:'assets/img/players/player2.png'},
-         {number: 3, name: 'Pepito Perez', avatarUrl:'assets/img/players/player3.png'},
-         {number: 4, name: 'Roberta Fernández', avatarUrl:'assets/img/players/player4.png'},
-         {number: 5, name: 'David Donatello', avatarUrl:'assets/img/players/player5.png'}
-      ]
-   },
+    getChildContext: function() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    },
 
-  render: function() {
+    componentWillMount: function() {
+        ReportActions.updateCallList(this.props.params.reportId, this.props.params.teamId)
+    },
+
+    render: function() {
      return(
         <Card>
            <CardTitle title="Greenpeace FC" subtitle="Call up list"/>
            <List>
              {
-                this.players.map( player => {
-                   return <PlayerCallItem player={player}/>
+                this.state.playerList.map( player => {
+                   return <PlayerCallItem key={player.id} player={player} reportId={this.props.params.reportId}/>
                 })
              }
           </List>
        </Card>
     )
-  }
+    }
 });
 
 module.exports = PlayerCallList

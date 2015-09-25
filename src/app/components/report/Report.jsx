@@ -21,11 +21,6 @@ let RaisedButton = mui.RaisedButton,
    DropDownMenu = mui.DropDownMenu,
    Dialog = mui.Dialog;
 
-let periodItems = [
-   { payload: '1', text: '1º period' },
-   { payload: '2', text: '2º period' }
-]
-
 const Report = React.createClass( {
     mixins: [Reflux.connect(ReportStore, "report")],
 
@@ -50,8 +45,14 @@ const Report = React.createClass( {
                         <span>
                            <Avatar src={this.state.report.localAvatarUrl}/>
                         </span>
-                        <FlatButton label={this.state.report.localTeam} linkButton={true} href={ReportsAPI.getPlayersListUrl(this.state.report.id)} secondary={true} />
-                        <FlatButton label={this.state.report.visitorTeam} linkButton={true} href={ReportsAPI.getPlayersListUrl(this.state.report.id)}  secondary={true} />
+                        <FlatButton label={this.state.report.localTeam}
+                            linkButton={true}
+                            href={ReportsAPI.getPlayerCallListUrl(this.state.report.id, this.state.report.localTeamId)}
+                            secondary={true} />
+                        <FlatButton label={this.state.report.visitorTeam}
+                            linkButton={true}
+                            href={ReportsAPI.getPlayerCallListUrl(this.state.report.id, this.state.report.visitorTeamId)}
+                            secondary={true} />
                         <span>
                            <Avatar src={this.state.report.visitorAvatarUrl}/>
                         </span>
@@ -62,12 +63,6 @@ const Report = React.createClass( {
                         <br/>
                         <small><i>{this.state.report.localFouls} - {this.state.report.visitorFouls}</i></small>
                      </div>
-                     <p>
-                        <p>
-                           <DropDownMenu menuItems={periodItems} />
-                        </p>
-                        <FlatButton label="Events" linkButton={true} href={EventsAPI.getEventListUrl(this.state.report.id)}  secondary={true} />
-                     </p>
                   </div>
                   <hr/>
                   <div style={style.div}>

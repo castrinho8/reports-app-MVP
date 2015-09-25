@@ -12,7 +12,9 @@ let ReportStore = Reflux.createStore({
             report: {
                 "id": "",
                 "localTeam": "",
+                "localTeamId": "",
                 "visitorTeam": "",
+                "visitorTeamId": "",
                 "localResult": "",
                 "visitorResult": "",
                 "localFouls": "",

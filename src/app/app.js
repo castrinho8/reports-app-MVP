@@ -74,7 +74,7 @@ React.render((
             <Route path="report/:reportId" component={Report} />
             <Route path="player-list/:reportId" component={PlayerList} />
             <Route path="event-list/:reportId" component={EventList} />
-            <Route path="player-call-list/:reportId" component={PlayerCallList} />
+            <Route path="player-call-list/:reportId/:teamId" component={PlayerCallList} />
             <Route path="end-game/:reportId" component={EndGame} />
             <Route path="*" component={Login} />
         </Route>
