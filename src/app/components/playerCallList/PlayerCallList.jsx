@@ -12,7 +12,7 @@ let List = mui.List,
 let ThemeManager = new mui.Styles.ThemeManager();
 
 let PlayerCallList = React.createClass( {
-    mixins: [Reflux.connect(PlayerCallStore, "playerList")],
+    mixins: [Reflux.connect(PlayerCallStore, "playerCallList")],
 
     childContextTypes: {
      muiTheme: React.PropTypes.object
@@ -26,22 +26,26 @@ let PlayerCallList = React.createClass( {
 
     componentWillMount: function() {
         ReportActions.updateCallList(this.props.params.reportId, this.props.params.teamId)
+        ReportActions.updateTeamName(this.props.params.teamId)
     },
 
     render: function() {
-     return(
-        <Card>
-           <CardTitle title="Greenpeace FC" subtitle="Call up list"/>
-           <List>
-             {
-                this.state.playerList.map( player => {
-                   return <PlayerCallItem key={player.id} player={player} reportId={this.props.params.reportId}/>
+        let elements
+        if(!!this.state.playerCallList.playerList.length) {
+                elements = this.state.playerCallList.playerList.map( player => {
+                  return <PlayerCallItem key={player.id} player={player} reportId={this.props.params.reportId}/>
                 })
-             }
-          </List>
-       </Card>
-    )
-    }
+        }
+
+         return(
+            <Card>
+               <CardTitle title={this.state.playerCallList.teamName} subtitle="Call up list"/>
+               <List>
+                 { elements }
+              </List>
+           </Card>
+        )
+        }
 });
 
 module.exports = PlayerCallList

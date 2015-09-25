@@ -2,16 +2,20 @@ import Reflux from 'reflux';
 import ReportActions from '../../actions/report/ReportActions';
 import API from '../../api/API.js';
 import ReportsAPI from '../../api/report/ReportsAPI.js';
+import TeamAPI from '../../api/team/TeamAPI.js';
 
 let PlayerCallStore = Reflux.createStore({
     listenables: [ReportActions],
 
     init: function() {
-        this.playerList = []
+        this.state = {
+            playerList: [],
+            teamName: ""
+        };
     },
 
     getInitialState: function() {
-        return this.playerList;
+        return this.state;
     },
 
     onUpdateCallList: function(reportId, teamId) {
@@ -19,9 +23,27 @@ let PlayerCallStore = Reflux.createStore({
         API.get(url, (err, res) => {
             // TODO Check errors
             let list = JSON.parse(res.text);
-            this.playerList = list;
-            this.triggerAsync(this.playerList);
+            let state = {
+                playerList: list,
+                teamName: this.state.teamName
+            }
+            this.state = state;
+            this.triggerAsync(this.state);
         });
+    },
+
+    onUpdateTeamName: function(teamId) {
+        let url = TeamAPI.getTeamAPIUrl(teamId)
+        API.get(url, (err, res) => {
+            // TODO Check errors
+            let team = JSON.parse(res.text);
+            let state = {
+                playerList: this.state.playerList,
+                teamName: team.teamName
+            }
+            this.state = state
+            this.triggerAsync(this.state)
+        })
     },
 
     onToggleCallPlayer: function(reportId, teamId, playerId, newState) {
