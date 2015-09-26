@@ -72,6 +72,10 @@ React.render((
             <Route path="login" component={Login} />
             <Route path="report-list" component={ReportList} />
             <Route path="report/:reportId" component={Report} />
+            <Route path="report/:reportId/event/goal" component={PlayerList} />
+            <Route path="report/:reportId/event/foul" component={PlayerList} />
+            <Route path="report/:reportId/event/yellow-card" component={PlayerList} />
+            <Route path="report/:reportId/event/red-card" component={PlayerList} />
             <Route path="player-list/:reportId" component={PlayerList} />
             <Route path="event-list/:reportId" component={EventList} />
             <Route path="player-call-list/:reportId/:teamId" component={PlayerCallList} />

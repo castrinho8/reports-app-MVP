@@ -1,6 +1,9 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 import GoalEvent from '../event/goalEvent/GoalEvent'
+import ReportActions from '../../actions/report/ReportActions.jsx'
+import PlayerListStore from '../../stores/playerList/PlayerListStore.jsx'
 
 // Components
 let ThemeManager = new mui.Styles.ThemeManager();
@@ -16,6 +19,7 @@ let standardActions = [
 ]
 
 let PlayerList = React.createClass( {
+    mixins: [Reflux.connect(PlayerListStore, "playerList")],
 
    childContextTypes: {
      muiTheme: React.PropTypes.object
@@ -27,23 +31,15 @@ let PlayerList = React.createClass( {
      };
    },
 
-   getInitialState: function() {
-      return {
-         locals: [
-            {number: 1, name: 'John Bruce', avatarUrl:'assets/img/players/player1.png'},
-            {number: 2, name: 'Fulano Detal', avatarUrl:'assets/img/players/player2.png'},
-            {number: 3, name: 'Pepito Perez', avatarUrl:'assets/img/players/player3.png'},
-            {number: 4, name: 'Roberta Fernández', avatarUrl:'assets/img/players/player4.png'},
-            {number: 5, name: 'David Donatello', avatarUrl:'assets/img/players/player5.png'},
-         ],
-         visitors: [
-            {number: 1, name: 'Marco Bersategui', avatarUrl:'assets/img/players/player6.png'},
-            {number: 2, name: 'José Magar', avatarUrl:'assets/img/players/player7.png'},
-            {number: 3, name: 'Julio Corral', avatarUrl:'assets/img/players/player8.png'},
-            {number: 4, name: 'Farruco Canda', avatarUrl:'assets/img/players/player9.png'},
-            {number: 5, name: 'Manuel Arca', avatarUrl:'assets/img/players/player10.png'},
-         ]
-      }
+   componentWillMount: function() {
+       let reportId = this.props.params.reportId
+       // Update report
+       ReportActions.updateReportInPlayerList(reportId, function(report) {
+          let localId = report.localTeamId
+          let visitorId = report.visitorTeamId
+          // When report is updated, update list of players foreach team
+          ReportActions.updatePlayersList(reportId, localId, visitorId)
+       })
    },
 
   render: function() {
@@ -51,19 +47,19 @@ let PlayerList = React.createClass( {
       return (
          <div>
             <Tabs>
-               <Tab label="Local team">
+               <Tab label={this.state.playerList.report.localTeam}>
                   <List>
                      {
-                        this.state.locals.map( player => {
+                        this.state.playerList.localList.map( player => {
                            return <GoalEvent player={player} />
                         })
                      }
                   </List>
                </Tab>
-               <Tab label="Visitor team">
+               <Tab label={this.state.playerList.report.visitorTeam}>
                   <List>
                      {
-                        this.state.visitors.map( player => {
+                        this.state.playerList.visitorList.map( player => {
                            return <GoalEvent player={player} />
                         })
                      }

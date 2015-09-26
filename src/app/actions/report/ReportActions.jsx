@@ -6,7 +6,9 @@ let ReportListActions = Reflux.createActions([
     'updateReport',
     'updateCallList',
     'toggleCallPlayer',
-    'updateTeamName'
+    'updateTeamName',
+    'updatePlayersList',
+    'updateReportInPlayerList'
     ]);
 
 module.exports = ReportListActions;

@@ -8,7 +8,11 @@ let ReportsAPI = {
     },
 
     getPlayerCallListAPIUrl: function(reportId, teamId) {
-        return API.getBaseAPIUrl() + 'callList?reportId=' + reportId + '&teamId=' + teamId
+        return API.getBaseAPIUrl() + 'callList?reportId=' + reportId + '&teamId=' + teamId;
+    },
+
+    getCalledPlayersAPIUrl: function(reportId, teamId) {
+        return API.getBaseAPIUrl() + 'callList?reportId=' + reportId +  '&teamId=' + teamId + '&isCalled=true';
     },
 
     putPlayerCallAPIUrl: function(playerId) {

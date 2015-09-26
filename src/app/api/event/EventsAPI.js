@@ -8,19 +8,19 @@ let EventsAPI = {
     },
 
     getGoalUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId + '/event?type=goal'
+        return API.getBaseUrl() + 'report/' + reportId + '/event/goal'
     },
 
     getFoulUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId + '/event?type=foul'
+        return API.getBaseUrl() + 'report/' + reportId + '/event/foul'
     },
 
     getYellowCardUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId + '/event?type=yellow-card'
+        return API.getBaseUrl() + 'report/' + reportId + '/event/yellow-card'
     },
 
     getRedCardUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId + '/event?type=red-card'
+        return API.getBaseUrl() + 'report/' + reportId + '/event/red-card'
     },
 
 }
