@@ -1,6 +1,7 @@
 import React from 'react';
 import Reflux from 'reflux';
 import mui from 'material-ui';
+import ReportsAPI from '../../api/report/ReportsAPI.js'
 
 // Styles
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
@@ -13,15 +14,17 @@ let List = mui.List,
 
 let PendingList = React.createClass( {
 
-  render: function() {
+    render: function() {
       var content = <p>Loading...</p>
       if (this.props.list) {
          content = this.props.list.map( match => {
             return <ListItem class="list-center"
-               primaryText={ match.local + ' - ' + match.visitor }
+               primaryText={match.local + ' - ' + match.visitor}
                secondaryText={ match.time + ' - ' + match.place }
                leftAvatar={<Avatar src= { match.localAvatarUrl } />}
-               rightAvatar={<Avatar src={ match.localAvatarUrl } />} />
+               rightAvatar={<Avatar src={ match.localAvatarUrl } />}
+               href={ReportsAPI.getReportUrl(match.id)}
+               />
          })
       }
       return (
@@ -29,7 +32,7 @@ let PendingList = React.createClass( {
             {content}
          </List>
     )
-  }
-});
+    }
+    });
 
 module.exports = PendingList

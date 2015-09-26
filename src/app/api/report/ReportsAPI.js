@@ -3,6 +3,10 @@ import API from '../API.js'
 
 let ReportsAPI = {
 
+    getReportUrl: function(reportId) {
+        return API.getBaseUrl() + 'report/' + reportId;
+    },
+
     getReportAPIUrl: function(reportId) {
         return API.getBaseAPIUrl() + 'report/' + reportId;
     },
