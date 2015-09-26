@@ -25,6 +25,14 @@ let ReportsAPI = {
 
     getPlayerCallListUrl: function(reportId, teamId) {
         return API.getBaseUrl() + 'player-call-list/' + reportId + '/' + teamId;
+    },
+
+    getNextGamesAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'nextmatch';
+    },
+
+    getFinishedGamesAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'finishedmatch';
     }
 
 }

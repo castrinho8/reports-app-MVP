@@ -1,58 +1,52 @@
 import Reflux from 'reflux';
 import ReportActions from '../../actions/report/ReportActions';
 import request from 'superagent';
-import config from '../config.json'
+import ReportsAPI from '../../api/report/ReportsAPI.js'
+import API from '../../api/API.js';
 
 let ReportListStore = Reflux.createStore({
    listenables: [ReportActions],
-   nextGamesUrl: config.nextGamesUrl,
-   finishedUrl: config.finishedUrl,
+
+   init: function() {
+       this.state = {
+          nextGamesList: [],
+          finishedGamesList: []
+          }
+   },
 
    getInitialState: function() {
-      return {
-         nextGamesList: [],
-         finishedGamesList: []
-         }
+       return this.state;
    },
 
-   onUpdateNextGamesList: function() {
-      request
-      .get(this.nextGamesUrl)
-      .set('Access-Control-Allow-Origin', '*')
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-         // Calling the end function will send the request
-         let newList = JSON.parse(res.text);
-         this.nextGamesList = newList;
-         let lists = {
-            nextGamesList: newList,
-            finishedGamesList: this.finishedGamesList
-            }
-         this.triggerAsync(lists);
-      });
-   },
+    onUpdateNextGamesList: function() {
+       let url = ReportsAPI.getNextGamesAPIUrl()
+       API.get(url, (err, res) => {
+           // Calling the end function will send the request
+           let nextGames = JSON.parse(res.text);
+           // TODO CHECK IF THIS IS ONLY ONE ELEMENT
+           let newState = {
+               nextGamesList: nextGames,
+               finishedGamesList: this.state.finishedGamesList
+           }
+           this.state = newState;
+           this.triggerAsync(this.state);
+       });
+    },
 
-   onUpdateFinishedGamesList: function() {
-      request
-      .get(this.finishedUrl)
-      .set('Access-Control-Allow-Origin', '*')
-      .set('Accept', 'application/json')
-      .end((err, res) => {
-         // Calling the end function will send the request
-         let newList = JSON.parse(res.text);
-         this.finishedGamesList = newList;
-
-         let lists = {
-            nextGamesList: this.nextGamesList,
-            finishedGamesList: newList
-            }
-         this.triggerAsync(lists);
-      });
-   },
-
-   getNextGamesList: function() {
-      return this.nextGamesList;
-   }
+    onUpdateFinishedGamesList: function() {
+       let url = ReportsAPI.getFinishedGamesAPIUrl()
+       API.get(url, (err, res) => {
+           // Calling the end function will send the request
+           let finishedGames = JSON.parse(res.text);
+           // TODO CHECK IF THIS IS ONLY ONE ELEMENT
+           let newState = {
+               nextGamesList: this.state.nextGamesList,
+               finishedGamesList: finishedGames
+           }
+           this.state = newState;
+           this.triggerAsync(this.state);
+       });
+    },
 
 });
 
