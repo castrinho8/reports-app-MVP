@@ -30,6 +30,32 @@ let EventStore = Reflux.createStore({
         API.post(url, params, (err, res) => {
             // TODO Check errors
         });
+    },
+
+    putYellowCard: function(reportId, playerId) {
+        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
+        let params = {
+            "reportId": reportId,
+            "playerId": playerId,
+            "type": "yellowCard"
+        }
+        console.log(url, params)
+        API.post(url, params, (err, res) => {
+            // TODO Check errors
+        });
+    },
+
+    putRedCard: function(reportId, playerId) {
+        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
+        let params = {
+            "reportId": reportId,
+            "playerId": playerId,
+            "type": "redCard"
+        }
+        console.log(url, params)
+        API.post(url, params, (err, res) => {
+            // TODO Check errors
+        });
     }
 
 });

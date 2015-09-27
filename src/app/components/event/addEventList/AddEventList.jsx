@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import mui from 'material-ui';
 import GoalEvent from '../goalEvent/GoalEvent'
 import FoulEvent from '../foulEvent/FoulEvent'
+import CardEvent from '../cardEvent/CardEvent'
 import ReportActions from '../../../actions/report/ReportActions.jsx'
 import PlayerListStore from '../../../stores/playerList/PlayerListStore.jsx'
 
@@ -48,9 +49,9 @@ let AddEventList = React.createClass( {
         if(type == 'foul')
             result = <FoulEvent player={player} reportId={this.props.params.reportId}/>
         if(type == 'yellow-card')
-            result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
+            result = <CardEvent player={player} type="yellow" reportId={this.props.params.reportId}/>
         if(type == 'red-card')
-            result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
+            result = <CardEvent player={player} type="red" reportId={this.props.params.reportId}/>
 
         return result
    },
