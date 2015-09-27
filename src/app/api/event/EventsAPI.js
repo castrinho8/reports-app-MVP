@@ -11,6 +11,10 @@ let EventsAPI = {
         return API.getBaseUrl() + 'report/' + reportId + '/event/goal'
     },
 
+    putGoalAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'event/'
+    },
+
     getFoulUrl: function(reportId) {
         return API.getBaseUrl() + 'report/' + reportId + '/event/foul'
     },

@@ -2,7 +2,7 @@ import React from 'react'
 import Login from './components/login/Login.jsx'
 import ReportList from './components/reportList/ReportList.jsx'
 import Report from './components/report/Report.jsx'
-import PlayerList from './components/playerList/PlayerList.jsx'
+import AddEventList from './components/event/addEventList/AddEventList.jsx'
 import EventList from './components/event/eventList/EventList.jsx'
 import PlayerCallList from './components/playerCallList/PlayerCallList.jsx'
 import EndGame from './components/endGame/EndGame.jsx'
@@ -72,11 +72,7 @@ React.render((
             <Route path="login" component={Login} />
             <Route path="report-list" component={ReportList} />
             <Route path="report/:reportId" component={Report} />
-            <Route path="report/:reportId/event/goal" component={PlayerList} />
-            <Route path="report/:reportId/event/foul" component={PlayerList} />
-            <Route path="report/:reportId/event/yellow-card" component={PlayerList} />
-            <Route path="report/:reportId/event/red-card" component={PlayerList} />
-            <Route path="player-list/:reportId" component={PlayerList} />
+            <Route path="report/:reportId/event/:type" component={AddEventList} />
             <Route path="event-list/:reportId" component={EventList} />
             <Route path="player-call-list/:reportId/:teamId" component={PlayerCallList} />
             <Route path="end-game/:reportId" component={EndGame} />

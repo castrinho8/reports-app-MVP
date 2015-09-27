@@ -31,8 +31,18 @@ let API = {
         .end((err, res) => {
             callback(err, res);
         });
-    }
+    },
 
+    post: function(url, params, callback) {
+        request
+        .post(url)
+        .send(params)
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+            callback(err, res);
+        });
+    }
 }
 
 module.exports = API
