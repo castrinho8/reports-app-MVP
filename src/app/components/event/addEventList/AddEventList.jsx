@@ -46,7 +46,7 @@ let AddEventList = React.createClass( {
         if(type == 'goal')
             result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
         if(type == 'foul')
-            result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
+            result = <FoulEvent player={player} reportId={this.props.params.reportId}/>
         if(type == 'yellow-card')
             result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
         if(type == 'red-card')

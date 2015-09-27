@@ -1,7 +1,8 @@
 import Reflux from 'reflux';
 
 let EventActions = Reflux.createActions([
-    'putGoal'
+    'putGoal',
+    'putFoul'
     ]);
 
 module.exports = EventActions;

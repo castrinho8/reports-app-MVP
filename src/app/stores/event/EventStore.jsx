@@ -7,7 +7,7 @@ let EventStore = Reflux.createStore({
     listenables: [EventActions],
 
     putGoal: function(reportId, playerId) {
-        let url = EventsAPI.putGoalAPIUrl(reportId, playerId)
+        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
         let params = {
             "reportId": reportId,
             "playerId": playerId,
@@ -18,6 +18,19 @@ let EventStore = Reflux.createStore({
             // TODO Check errors
         });
     },
+
+    putFoul: function(reportId, playerId) {
+        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
+        let params = {
+            "reportId": reportId,
+            "playerId": playerId,
+            "type": "foul"
+        }
+        console.log(url, params)
+        API.post(url, params, (err, res) => {
+            // TODO Check errors
+        });
+    }
 
 });
 
