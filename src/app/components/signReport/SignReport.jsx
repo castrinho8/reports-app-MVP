@@ -19,14 +19,14 @@ let SignReport = React.createClass( {
    },
 
    render: function() {
-
+       let title = "Sign" + (this.props.teamName ? " - " + this.props.teamName : "")
       return (
          <div>
             <Dialog ref="signEvent"
-             title="Sign"
+             title={title}
              actions={standardActions}
              actionFocus="submit"
-             modal="false">
+             modal={false}>
              <hr/>
              <div>
                 <DropDownMenu menuItems={this.props.players} />

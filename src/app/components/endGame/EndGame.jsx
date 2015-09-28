@@ -1,7 +1,12 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 import style from './endGameStyle';
 import SignReport from '../signReport/SignReport';
+import EndGameStore from '../../stores/endGame/EndGameStore';
+import ReportActions from '../../actions/report/ReportActions.jsx'
+
+let ThemeManager = new mui.Styles.ThemeManager();
 
 let TextField = mui.TextField,
    RaisedButton = mui.RaisedButton,
@@ -9,52 +14,59 @@ let TextField = mui.TextField,
    Tab = mui.Tab;
 
 let EndGame = React.createClass( {
+    mixins: [Reflux.connect(EndGameStore, "endGame")],
 
-   locals: [],
-   visitors: [],
-   referees: [],
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
 
-   componentWillMount: function() {
-      // Sample data
-      this.locals = [
-         {payload: '1', text: 'John Bruce'},
-         {payload: '2', text: 'Fulano Detal'},
-         {payload: '3', text: 'Pepito Perez'},
-         {payload: '4', text: 'Roberta Fernández'},
-         {payload: '5', text: 'David Donatello'},
-      ]
-      this.visitors = [
-         {payload: '1', text: 'Marco Bersategui'},
-         {payload: '2', text: 'José Magar'},
-         {payload: '3', text: 'Julio Corral'},
-         {payload: '4', text: 'Farruco Canda'},
-         {payload: '5', text: 'Manuel Arca'},
-      ]
-      this.referees = [
-         {payload: '1', text: 'Manolo Castro'}
-      ]
-   },
+    getChildContext: function() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    },
+
+    componentWillMount: function() {
+        ReportActions.updateEndGameReport(this.props.params.reportId, function() {
+            console.log(this.state.endGame.referees)
+        })
+    },
+
+    _handleIncidencesChange: function(e) {
+        let newReport = this.state.endGame.report
+        newReport.incidences = e.target.value
+        this.setState({
+            report: newReport
+        });
+    },
 
    render: function() {
       return (
          <div>
             <Tabs>
                <Tab label="Referee">
-                  <div style={style.center}>
+                   <div style={style.center}>
+                  <p>
                      <TextField
                         floatingLabelText="Incidences"
                         hintText="Write incidences"
-                        multiLine={true} />
+                        multiLine={true}
+                        value={this.state.endGame.report.incidences}
+                        onChange={this._handleIncidencesChange}/>
+                  </p>
+                  <p>
+                    <RaisedButton label="Send incidences" primary={true} />
+                  </p>
                   </div>
                   <div>
-                     <SignReport style={style} players={this.referees}/>
+                     <SignReport style={style} players={this.state.endGame.referees}/>
                   </div>
                </Tab>
-               <Tab label="Local">
-                  <SignReport style={style} players={this.locals}/>
+               <Tab label={this.state.endGame.report.localTeam}>
+                  <SignReport style={style} teamName={this.state.endGame.report.localTeam} players={this.state.endGame.localPlayers}/>
                </Tab>
-               <Tab label="Visitor">
-                  <SignReport style={style} players={this.visitors}/>
+               <Tab label={this.state.endGame.report.visitorTeam}>
+                  <SignReport style={style} teamName={this.state.endGame.report.visitorTeam} players={this.state.endGame.visitorPlayers}/>
                </Tab>
             </Tabs>
          </div>
