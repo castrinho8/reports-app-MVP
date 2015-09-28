@@ -38,7 +38,7 @@ let EndGameStore = Reflux.createStore({
                     referees: gameReport.referees
             }
             this.state = state
-            this.triggerAsync(this.state);
+            this.trigger(this.state);
 
             // Update local team
             this.updateList(reportId, localTeamId, (err, res) => {
@@ -85,6 +85,14 @@ let EndGameStore = Reflux.createStore({
             result.push({"payload": index, "text": player.name});
         })
         return result;
+    },
+
+    onPutIncidences: function(reportId, incidences) {
+        let url = ReportsAPI.getReportAPIUrl(reportId)
+        let params = {"incidences": incidences}
+        API.put(url, params, function(err, res){
+            // TODO CHECK ERRORS
+        })
     }
 });
 

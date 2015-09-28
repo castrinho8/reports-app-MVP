@@ -40,6 +40,13 @@ let EndGame = React.createClass( {
         });
     },
 
+    _handleSendIncidences: function() {
+        let reportId = this.state.endGame.report.id;
+        let incidences = this.state.endGame.report.incidences;
+        ReportActions.putIncidences(reportId, incidences);
+        this.refs.incidences.setErrorText("Incidences were updated!")
+    },
+
    render: function() {
       return (
          <div>
@@ -48,14 +55,16 @@ let EndGame = React.createClass( {
                    <div style={style.center}>
                   <p>
                      <TextField
+                        ref="incidences"
                         floatingLabelText="Incidences"
                         hintText="Write incidences"
                         multiLine={true}
+                        errorStyle={{color:'green'}}
                         value={this.state.endGame.report.incidences}
                         onChange={this._handleIncidencesChange}/>
                   </p>
                   <p>
-                    <RaisedButton label="Send incidences" primary={true} />
+                    <RaisedButton label="Send incidences" primary={true} onClick={this._handleSendIncidences}/>
                   </p>
                   </div>
                   <div>
