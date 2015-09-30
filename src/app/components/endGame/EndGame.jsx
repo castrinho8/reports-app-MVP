@@ -68,14 +68,20 @@ let EndGame = React.createClass( {
                   </p>
                   </div>
                   <div>
-                     <SignReport style={style} players={this.state.endGame.referees}/>
+                     <SignReport style={style}
+                         players={this.state.endGame.referees} reportId={this.state.endGame.report.id}
+                         sign={this.state.endGame.report.signReferee} type="referee"/>
                   </div>
                </Tab>
                <Tab label={this.state.endGame.report.localTeam}>
-                  <SignReport style={style} teamName={this.state.endGame.report.localTeam} players={this.state.endGame.localPlayers}/>
+                  <SignReport style={style} teamName={this.state.endGame.report.localTeam}
+                      players={this.state.endGame.localPlayers} reportId={this.state.endGame.report.id}
+                      sign={this.state.endGame.report.signLocal} type="local"/>
                </Tab>
                <Tab label={this.state.endGame.report.visitorTeam}>
-                  <SignReport style={style} teamName={this.state.endGame.report.visitorTeam} players={this.state.endGame.visitorPlayers}/>
+                  <SignReport style={style} teamName={this.state.endGame.report.visitorTeam}
+                      players={this.state.endGame.visitorPlayers} reportId={this.state.endGame.report.id}
+                      sign={this.state.endGame.report.signVisitor} type="visitor"/>
                </Tab>
             </Tabs>
          </div>

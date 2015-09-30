@@ -38,7 +38,7 @@ let EndGameStore = Reflux.createStore({
                     referees: gameReport.referees
             }
             this.state = state
-            this.trigger(this.state);
+            this.triggerAsync(this.state);
 
             // Update local team
             this.updateList(reportId, localTeamId, (err, res) => {
@@ -93,7 +93,24 @@ let EndGameStore = Reflux.createStore({
         API.put(url, params, function(err, res){
             // TODO CHECK ERRORS
         })
+    },
+
+    onSignReport: function(reportId, type, person, callback) {
+        let url = ReportsAPI.getReportAPIUrl(reportId)
+        let params = {}
+        if(type == "referee")
+            params = { "signReferee": person }
+        if(type == "local")
+            params = { "signLocal": person }
+        if(type == "visitor")
+            params = { "signVisitor": person}
+
+        API.put(url, params, function(err, res){
+            // TODO CHECK ERRORS
+            callback(err, res)
+        })
     }
+
 });
 
 module.exports = EndGameStore;
