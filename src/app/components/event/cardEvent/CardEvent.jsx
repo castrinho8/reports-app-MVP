@@ -35,12 +35,17 @@ let CardEvent = React.createClass( {
 
     _onDialogSubmit: function() {
         let reportId = this.props.reportId
-        let playerId = this.props.player.id
-
+        let term = 1
+        let playerParams = {
+            id: this.props.player.id,
+            name: this.props.player.name,
+            number: this.props.player.number,
+            teamName: this.props.player.teamName
+        }
         if(this.props.type == 'yellow')
-            EventActions.putYellowCard(reportId, playerId);
+            EventActions.putYellowCard(reportId, playerParams, term);
         if(this.props.type == 'red')
-            EventActions.putRedCard(reportId, playerId);
+            EventActions.putRedCard(reportId, playerParams, term);
 
         // Redirect to report page
         window.location = ReportsAPI.getReportUrl(reportId)

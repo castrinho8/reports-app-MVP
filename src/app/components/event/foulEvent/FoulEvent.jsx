@@ -35,8 +35,14 @@ let FoulEvent = React.createClass( {
 
    _onDialogSubmit: function() {
        let reportId = this.props.reportId
-       let playerId = this.props.player.id
-       EventActions.putFoul(reportId, playerId);
+       let term = 1
+       let playerParams = {
+           id: this.props.player.id,
+           name: this.props.player.name,
+           number: this.props.player.number,
+           teamName: this.props.player.teamName
+       }
+       EventActions.putFoul(reportId, playerParams, term);
        // Redirect to report page
        window.location = ReportsAPI.getReportUrl(reportId)
    },

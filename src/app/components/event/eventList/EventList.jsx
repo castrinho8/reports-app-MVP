@@ -1,6 +1,11 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
-import EventItem from './EventItem'
+import EventItem from './EventItem';
+import EventStore from '../../../stores/event/EventStore';
+import EventActions from '../../../actions/event/EventActions';
+
+let ThemeManager = new mui.Styles.ThemeManager();
 
 // Components
 let List = mui.List,
@@ -8,26 +13,21 @@ let List = mui.List,
    ListItem = mui.ListItem;
 
 let EventList = React.createClass( {
+    mixins: [Reflux.connect(EventStore, "eventStore")],
 
-   getInitialState: function() {
-      return {
-         firstPeriod: [
-            {timeStamp: '17:45', number: 4, name: 'Roberta Fernández', team: 'Bens', eventIcon:'fa fa-sticky-note-o'},
-            {timeStamp: '13:29', number: 3, name: 'Pepito Perez', team: 'Greenpeace FC', eventIcon:'fa fa-gavel'},
-            {timeStamp: '09:24', number: 2, name: 'Fulano Detal', team: 'Greenpeace FC', eventIcon:'fa fa-gavel'},
-            {timeStamp: '05:33', number: 5, name: 'David Donatello', team: 'Greenpeace FC', eventIcon:'fa fa-sticky-note'},
-            {timeStamp: '05:13', number: 1, name: 'John Bruce', team: 'Bens', eventIcon:'fa fa-sticky-note-o'},
-            {timeStamp: '05:13', number: 1, name: 'John Bruce', team: 'Bens', eventIcon:'fa fa-sticky-note-o'}
-         ],
-         secondPeriod: [
-            {timeStamp: '19:38', number: 5, name: 'Manuel Arca', team: 'Greenpeace FC', eventIcon:'fa fa-futbol-o'},
-            {timeStamp: '16:32', number: 2, name: 'José Magar', team: 'Greenpeace FC', eventIcon:'fa fa-gavel'},
-            {timeStamp: '11:54', number: 4, name: 'Farruco Canda', team: 'Bens', eventIcon:'fa fa-gavel'},
-            {timeStamp: '10:20', number: 1, name: 'Marco Bersategui', team: 'Bens', eventIcon:'fa fa-futbol-o'},
-            {timeStamp: '02:12', number: 3, name: 'Julio Corral', team: 'Bens', eventIcon:'fa fa-sticky-note'}
-         ]
-      }
-   },
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+
+    getChildContext: function() {
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
+    },
+
+    componentWillMount: function() {
+        EventActions.updateEventList(this.props.params.reportId)
+    },
 
   render: function() {
 
@@ -35,7 +35,7 @@ let EventList = React.createClass( {
          <div>
             <List subheader="Second Period">
                {
-                  this.state.secondPeriod.map( player => {
+                  this.state.eventStore.firstTermEvents.map( player => {
                      return <EventItem player={player} />
                   })
                }
@@ -43,7 +43,7 @@ let EventList = React.createClass( {
             <ListDivider />
             <List subheader="First Period">
                {
-                  this.state.firstPeriod.map( player => {
+                  this.state.eventStore.secondTermEvents.map( player => {
                      return <EventItem player={player} />
                   })
                }

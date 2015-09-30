@@ -30,12 +30,12 @@ let EventItem = React.createClass( {
                   <div>
                   <span>({this.props.player.number}) {this.props.player.name}</span>
                   <span> - </span>
-                  <span style={style.team}>{ this.props.player.team }</span>
+                  <span style={style.team}>{ this.props.player.teamName }</span>
                   </div>
                }
                secondaryText={
                   <div>
-                     <span style={style.timestamp}>{this.props.player.timeStamp}</span>
+                     <span style={style.timestamp}>{this.props.player.type}</span>
                   </div>
                }
                secondaryTextLines={2}

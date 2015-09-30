@@ -4,7 +4,8 @@ let EventActions = Reflux.createActions([
     'putGoal',
     'putFoul',
     'putYellowCard',
-    'putRedCard'
+    'putRedCard',
+    'updateEventList'
     ]);
 
 module.exports = EventActions;

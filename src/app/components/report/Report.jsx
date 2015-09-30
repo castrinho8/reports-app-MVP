@@ -63,6 +63,10 @@ const Report = React.createClass( {
                         <br/>
                         <small><i>{this.state.report.localFouls} - {this.state.report.visitorFouls}</i></small>
                      </div>
+                     <p>
+                        <RaisedButton primary={true} label="Events"
+                            linkButton={true} href={EventsAPI.getEventListUrl(this.state.report.id)} />
+                     </p>
                   </div>
                   <hr/>
                   <div style={style.div}>

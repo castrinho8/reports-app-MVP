@@ -7,6 +7,10 @@ let EventsAPI = {
         return API.getBaseUrl() + 'report/' + reportId + '/event';
     },
 
+    getEventAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'event/'
+    },
+
     putEventAPIUrl: function() {
         return API.getBaseAPIUrl() + 'event/'
     },
