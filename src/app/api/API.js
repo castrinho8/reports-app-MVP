@@ -42,6 +42,17 @@ let API = {
         .end((err, res) => {
             callback(err, res);
         });
+    },
+
+    delete: function(url, params, callback) {
+        request
+        .del(url)
+        .send(params)
+        .set('Access-Control-Allow-Origin', '*')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+            callback(err, res);
+        });
     }
 }
 

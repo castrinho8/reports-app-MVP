@@ -1,6 +1,8 @@
 import React from 'react';
 import Reflux from 'reflux';
 import mui from 'material-ui';
+import EventActions from '../../../actions/event/EventActions';
+
 // Import style
 import style from './eventItemStyle';
 
@@ -9,18 +11,23 @@ let MenuItem = require('material-ui/lib/menus/menu-item');
 let IconMenu = mui.IconMenu,
    IconButton = mui.IconButton,
    ListItem = mui.ListItem,
-   Dialog = mui.Dialog;
-
-let standardActions = [
-  {text: 'Cancel'},
-  {text: 'Accept'}
-]
+   Dialog = mui.Dialog,
+   FlatButton = mui.FlatButton;
 
 let EventItem = React.createClass( {
 
-   handleRemove: function() {
-      this.refs.removeEvent.show()
-   },
+    dismissDialog: function() {
+        this.refs.removeEvent.dismiss()
+    },
+
+    onDialogSubmit: function() {
+        EventActions.deleteEvent(this.props.player.id)
+        window.location.reload()
+    },
+
+    handleRemove: function() {
+        this.refs.removeEvent.show()
+    },
 
    render: function() {
       return (
@@ -47,9 +54,20 @@ let EventItem = React.createClass( {
                }>
                <Dialog ref="removeEvent"
                 title="Remove event"
-                actions={standardActions}
+                actions={
+                    [
+                        <FlatButton
+                          label="Cancel"
+                          secondary={true}
+                          onTouchTap={this.dismissDialog}/>,
+                        <FlatButton
+                          label="Submit"
+                          primary={true}
+                          onTouchTap={this.onDialogSubmit}/>
+                    ]
+                }
                 actionFocus="submit"
-                modal="false">
+                modal={false}>
                 <p>
                    Are you sure to remove this event?
                 </p>

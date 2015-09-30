@@ -90,7 +90,7 @@ let EventStore = Reflux.createStore({
     },
 
     onUpdateEventList: function(reportId)  {
-        let url = EventsAPI.getEventAPIUrl(reportId)
+        let url = EventsAPI.getEventListAPIUrl(reportId)
         API.get(url, (err, res) => {
             // Calling the end function will send the request
             let events = JSON.parse(res.text);
@@ -105,6 +105,14 @@ let EventStore = Reflux.createStore({
             this.triggerAsync(this.state);
         });
     },
+
+    onDeleteEvent: function(eventId) {
+        let url = EventsAPI.getEventAPIUrl(eventId)
+        let params = {}
+        console.log(url)
+        API.delete(url, params, function(err, res) {
+        });
+    }
 });
 
 module.exports = EventStore;
