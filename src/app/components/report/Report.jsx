@@ -40,7 +40,7 @@ const Report = React.createClass( {
 
     render: function() {
          return <div style={coreStyle.center}>
-                  <div>
+                  <div style={style.div}>
                      <div>
                         <span>
                            <Avatar src={this.state.report.localAvatarUrl}/>

@@ -2,7 +2,7 @@
 module.exports =
 {
    div : {
-      marginTop: '10px'
+      marginTop: '15px'
    },
 
    button : {

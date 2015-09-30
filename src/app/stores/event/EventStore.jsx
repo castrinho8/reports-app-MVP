@@ -94,8 +94,8 @@ let EventStore = Reflux.createStore({
         API.get(url, (err, res) => {
             // Calling the end function will send the request
             let events = JSON.parse(res.text);
-            let first = events.filter(function(e){return e.term==1})
-            let second = events.filter(function(e){return e.term==2})
+            let first = events.filter(function(e){return e.term==1}).reverse();
+            let second = events.filter(function(e){return e.term==2}).reverse();
             // TODO CHECK IF THIS IS ONLY ONE ELEMENT
             let newState = {
                 firstTermEvents: first,
