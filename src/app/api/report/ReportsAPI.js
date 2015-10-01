@@ -7,24 +7,26 @@ let ReportsAPI = {
         return API.getBaseUrl() + 'reports/' + reportId;
     },
 
-    getReportAPIUrl: function(reportId) {
-        return API.getBaseAPIUrl() + 'reports/' + reportId;
+    getPlayerCallListUrl: function(reportId, teamId) {
+        return API.getBaseUrl() + 'player-call-list/' + reportId + '/' + teamId;
     },
 
-    getPlayerCallListAPIUrl: function(reportId, teamId) {
-        return API.getBaseAPIUrl() + 'callList?reportId=' + reportId + '&teamId=' + teamId;
+    /* ------------ API URLS -------------*/
+
+    getReportAPIUrl: function(reportId) {
+        return API.getBaseAPIUrl() + 'reports/' + reportId + '/';
     },
 
     getCalledPlayersAPIUrl: function(reportId, teamId) {
-        return API.getBaseAPIUrl() + 'callList?reportId=' + reportId +  '&teamId=' + teamId + '&isCalled=true';
+        return API.getBaseAPIUrl() + 'reports/' + reportId +  '/calledups/?teamId=' + teamId;
     },
 
-    putPlayerCallAPIUrl: function(playerId) {
-        return API.getBaseAPIUrl() + 'callList/' + playerId
+    postPlayerCallAPIUrl: function(reportId) {
+        return API.getBaseAPIUrl() + 'reports/' + reportId +  '/calledups/';
     },
 
-    getPlayerCallListUrl: function(reportId, teamId) {
-        return API.getBaseUrl() + 'player-call-list/' + reportId + '/' + teamId;
+    deletePlayerCallAPIUrl: function(reportId, playerId) {
+        return API.getBaseAPIUrl() + 'reports/' + reportId +  '/calledups/' + playerId + '/';
     },
 
     getNextGamesAPIUrl: function() {

@@ -14,7 +14,7 @@ let PlayerCallItem = React.createClass( {
 
     getInitialState: function() {
         return {
-            isCalled: this.props.player.isCalled
+            isCalled: this.props.element.isCalled
         }
     },
 
@@ -30,23 +30,23 @@ let PlayerCallItem = React.createClass( {
 
     _handleToggle: function(event, toggled) {
         this.setState({isCalled: toggled})
-        ReportActions.toggleCallPlayer(this.props.reportId, this.props.player.teamId, this.props.player.id, toggled)
+        ReportActions.toggleCallPlayer(this.props.reportId, this.props.element.player.team, this.props.element.player.id, toggled)
     },
 
     render: function() {
       return (
          <ListItem
-           primaryText={this.props.player.name}
-           secondaryText={this.props.player.number}
+           primaryText={this.props.element.player.user.first_name + ' ' +  this.props.element.player.user.last_name}
+           secondaryText={this.props.playerNumber}
            rightToggle={
               <Toggle
-                 name={"" + this.props.player.number}
+                 name={"" + this.props.element.player.playerNumber}
                  onToggle={this._handleToggle}
                  defaultToggled={this.state.isCalled}
-                 value={this.props.player.isCalled}/>
+                 value={this.props.element.isCalled}/>
            }
            leftAvatar={
-              <Avatar src={this.props.player.avatarUrl}/>
+              <Avatar src={this.props.element.player.avatarUrl}/>
            }
         />
     )

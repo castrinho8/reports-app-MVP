@@ -3,6 +3,7 @@ import ReportActions from '../../actions/report/ReportActions';
 import API from '../../api/API.js';
 import ReportsAPI from '../../api/report/ReportsAPI.js';
 import TeamAPI from '../../api/team/TeamAPI.js';
+import PlayersAPI from '../../api/player/PlayerAPI.js';
 
 let PlayerCallStore = Reflux.createStore({
     listenables: [ReportActions],
@@ -19,16 +20,39 @@ let PlayerCallStore = Reflux.createStore({
     },
 
     onUpdateCallList: function(reportId, teamId) {
-        let url = ReportsAPI.getPlayerCallListAPIUrl(reportId, teamId)
-        API.get(url, (err, res) => {
+        // Get all players list
+        let allUrl = PlayersAPI.getPlayersAPIUrl(teamId)
+        API.get(allUrl, (err, res) => {
             // TODO Check errors
-            let list = JSON.parse(res.text);
-            let state = {
-                playerList: list,
-                teamName: this.state.teamName
-            }
-            this.state = state;
-            this.triggerAsync(this.state);
+            let playersList = JSON.parse(res.text);
+
+            // Get only called players in this report
+            let calledUrl = ReportsAPI.getCalledPlayersAPIUrl(reportId, teamId)
+            API.get(calledUrl, (err, res) => {
+                // TODO Check errors
+                let calledList = JSON.parse(res.text);
+
+                // Get a wrapper list with all players in team and if they are called
+                let list = []
+                for(var i in playersList){
+                    let element = playersList[i]
+                    // Check if this player is in the called list
+                    let exists = calledList.filter(function(e) {return e.player.id==element.id}).length > 0
+                    let wrapper = {
+                        player: element,
+                        isCalled: exists
+                    }
+                    list.push(wrapper)
+                }
+
+                // Set the list in the state
+                let state = {
+                    playerList: list,
+                    teamName: this.state.teamName
+                }
+                this.state = state;
+                this.triggerAsync(this.state);
+            });
         });
     },
 
@@ -47,16 +71,22 @@ let PlayerCallStore = Reflux.createStore({
     },
 
     onToggleCallPlayer: function(reportId, teamId, playerId, newState) {
-        let url = ReportsAPI.putPlayerCallAPIUrl(playerId)
-        let params = {isCalled: newState}
-        let element;
-        for (var i in this.playerList){
-            if (this.playerList[i].id == playerId)
-            element = this.playerList[i]
+        let params = { player: playerId }
+
+        // If the new state is true it means that the player has to be called
+        if(newState){
+            // Create new Call
+            let url = ReportsAPI.postPlayerCallAPIUrl(reportId)
+            API.post(url, params, (err, res) => {
+                // TODO Check errors
+            });
+        } else{
+            // Delete call
+            let url = ReportsAPI.deletePlayerCallAPIUrl(reportId, playerId)
+            API.delete(url, {},  (err, res) => {
+                // TODO Check errors
+            });
         }
-        API.put(url, params, (err, res) => {
-            // TODO Check errors
-        });
     },
 
 });

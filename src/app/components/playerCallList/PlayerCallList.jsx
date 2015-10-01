@@ -32,8 +32,8 @@ let PlayerCallList = React.createClass( {
     render: function() {
         let elements
         if(!!this.state.playerCallList.playerList.length) {
-                elements = this.state.playerCallList.playerList.map( player => {
-                  return <PlayerCallItem key={player.id} player={player} reportId={this.props.params.reportId}/>
+                elements = this.state.playerCallList.playerList.map( item => {
+                  return <PlayerCallItem key={item.player.id} element={item} reportId={this.props.params.reportId}/>
                 })
         }
 
