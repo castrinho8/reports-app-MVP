@@ -34,7 +34,7 @@ let EndGame = React.createClass( {
 
     _handleIncidencesChange: function(e) {
         let newReport = this.state.endGame.report
-        newReport.incidences = e.target.value
+        newReport.issues = e.target.value
         this.setState({
             report: newReport
         });
@@ -42,8 +42,8 @@ let EndGame = React.createClass( {
 
     _handleSendIncidences: function() {
         let reportId = this.state.endGame.report.id;
-        let incidences = this.state.endGame.report.incidences;
-        ReportActions.putIncidences(reportId, incidences);
+        let issues = this.state.endGame.report.issues;
+        ReportActions.putIncidences(reportId, issues);
         this.refs.incidences.setErrorText("Incidencias actualizadas!")
     },
 
@@ -60,7 +60,7 @@ let EndGame = React.createClass( {
                         hintText="Escribir incidencias"
                         multiLine={true}
                         errorStyle={{color:'green'}}
-                        value={this.state.endGame.report.incidences}
+                        value={this.state.endGame.report.issues}
                         onChange={this._handleIncidencesChange}/>
                   </p>
                   <p>

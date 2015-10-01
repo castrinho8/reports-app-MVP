@@ -87,9 +87,9 @@ let EndGameStore = Reflux.createStore({
         return result;
     },
 
-    onPutIncidences: function(reportId, incidences) {
+    onPutIncidences: function(reportId, issues) {
         let url = ReportsAPI.getReportAPIUrl(reportId)
-        let params = {"incidences": incidences}
+        let params = {"issues": issues}
         API.put(url, params, function(err, res){
             // TODO CHECK ERRORS
         })

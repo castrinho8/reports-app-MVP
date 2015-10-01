@@ -9,28 +9,35 @@ let ReportStore = Reflux.createStore({
 
     getInitialState: function() {
         return {
-            report: {
-                "id": "",
-                "localTeam": "",
-                "localTeamId": "",
-                "visitorTeam": "",
-                "visitorTeamId": "",
-                "localResult": "",
-                "visitorResult": "",
-                "localFouls": "",
-                "visitorFouls": "",
-                "events": []
-            }
+            report: { }
          }
     },
 
     onUpdateReport: function(reportId) {
-        let url = ReportsAPI.getReportAPIUrl(reportId)
-        API.get(url, (err, res) => {
-            // Calling the end function will send the request
-            let report = JSON.parse(res.text);
+        let urlReport = ReportsAPI.getReportAPIUrl(reportId)
+        API.get(urlReport, (errR, resR) => {
+            let report = JSON.parse(resR.text)
             // TODO CHECK IF THIS IS ONLY ONE ELEMENT
-            this.report = report;
+            let reportWrapper = {
+                id: report.id,
+                localTeam: report.match.localTeam.teamName,
+                localTeamId: report.match.localTeam.id,
+                visitorTeam: report.match.visitorTeam.teamName,
+                visitorTeamId: report.match.visitorTeam.id,
+                localResult: "",
+                visitorResult: "",
+                localFouls: "",
+                visitorFouls: "",
+                localAvatarUrl: "http://lorempixel.com/400/200/sports/",
+                visitorAvatarUrl: "http://lorempixel.com/400/200/sports/",
+                referees: {
+                    payload: report.owner.id,
+                    text: report.owner.name
+                },
+                issues: report.issues
+            }
+
+            this.report = reportWrapper;
             this.triggerAsync(this.report);
         });
     },

@@ -4,11 +4,11 @@ import API from '../API.js'
 let ReportsAPI = {
 
     getReportUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId;
+        return API.getBaseUrl() + 'reports/' + reportId;
     },
 
     getReportAPIUrl: function(reportId) {
-        return API.getBaseAPIUrl() + 'report/' + reportId;
+        return API.getBaseAPIUrl() + 'reports/' + reportId;
     },
 
     getPlayerCallListAPIUrl: function(reportId, teamId) {
