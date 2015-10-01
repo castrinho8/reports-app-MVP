@@ -9,12 +9,14 @@ import EndGame from './components/endGame/EndGame.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 import { Router, Route, IndexRoute } from 'react-router';
 import mui from 'material-ui';
+import coreStyle from '../assets/componentStyle/coreStyle.js'
 
 let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors,
       AppBar = mui.AppBar,
       LeftNav = mui.LeftNav,
-      MenuItem = mui.MenuItem;
+      MenuItem = mui.MenuItem,
+      Avatar = mui.Avatar;
 
 //Needed for onTouchTap
 //Can go away when react 1.0 release
@@ -26,13 +28,8 @@ injectTapEventPlugin();
  * Elements in Left Nav
  */
 let menuItems = [
-   { type: MenuItem.Types.LINK, payload: '/login', text: 'Login' },
-   { type: MenuItem.Types.LINK, payload: '/report-list', text: 'Report List' },
-   { type: MenuItem.Types.LINK, payload: '/report', text: 'Report' },
-   { type: MenuItem.Types.LINK, payload: '/player-list', text: 'Player List' },
-   { type: MenuItem.Types.LINK, payload: '/event-list', text: 'Event List' },
-   { type: MenuItem.Types.LINK, payload: '/player-call-list', text: 'Call List' },
-   { type: MenuItem.Types.LINK, payload: '/end-game', text: 'End game' }
+    { type: MenuItem.Types.SUBHEADER, text: 'Actas' },
+    { type: MenuItem.Types.LINK, payload: '/#/report-list', text: 'Lista de actas' }
 ]
 
 /*
@@ -59,7 +56,10 @@ let ReportsApp = React.createClass( {
          <AppBar
            title="VACmatch"
            iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this._handleTouchTap}/>
-         <LeftNav ref="leftNav" docked={false} menuItems={menuItems} />
+       <LeftNav ref="leftNav" docked={false} menuItems={menuItems}
+           header={
+               <Avatar src='assets/img/vacmatch.png' size='100' style={coreStyle.avatar} />
+           }/>
          {this.props.children}
       </div>
    }
@@ -80,21 +80,3 @@ React.render((
         </Route>
     </Router>
 ), document.getElementById('container'));
-
-
-/*
-// Routes
-let routes = <Route handler={ReportsApp}>
-   <Route path="login" handler={Login} />
-   <Route path="report-list" handler={ReportList} />
-   <Route path="report" handler={Report} />
-   <Route path="player-list" handler={PlayerList} />
-   <Route path="event-list" handler={EventList} />
-   <Route path="player-call-list" handler={PlayerCallList} />
-   <Route path="end-game" handler={EndGame} />
-   <DefaultRoute handler={Login}/>
-</Route>
-
-Router.run(routes, Router.HistoryLocation, (Root) => {
-   React.render(<Root />, document.getElementById('container'));
-});*/

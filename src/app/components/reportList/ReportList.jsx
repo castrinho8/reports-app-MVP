@@ -32,10 +32,10 @@ let ReportList = React.createClass( {
     render: function() {
         return (
          <Tabs>
-            <Tab label="Next games">
+            <Tab label="Próximos partidos">
                <PendingList list={this.state.lists.nextGamesList}/>
             </Tab>
-            <Tab label="Finished">
+            <Tab label="Terminados">
                <FinishedList list={this.state.lists.finishedGamesList}/>
             </Tab>
          </Tabs>

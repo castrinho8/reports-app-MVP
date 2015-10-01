@@ -30,15 +30,15 @@ let Login = React.createClass( {
          <p>
             <TextField
                label="User"
-               floatingLabelText="Username" />
+               floatingLabelText="Usuario" />
          </p>
          <p>
             <TextField
                label="Password"
-               floatingLabelText="Password" />
+               floatingLabelText="Contraseña" />
          </p>
          <p>
-            <FlatButton label="Accept" primary={true} />
+            <FlatButton label="Aceptar" primary={true} />
          </p>
       </div>
     )

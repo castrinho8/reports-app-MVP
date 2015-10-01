@@ -33,7 +33,7 @@ let EventList = React.createClass( {
 
       return (
          <div>
-            <List subheader="Second Period">
+            <List subheader="Segunda parte">
                {
                   this.state.eventStore.firstTermEvents.map( player => {
                      return <EventItem player={player} />
@@ -41,7 +41,7 @@ let EventList = React.createClass( {
                }
             </List>
             <ListDivider />
-            <List subheader="First Period">
+            <List subheader="Primera parte">
                {
                   this.state.eventStore.secondTermEvents.map( player => {
                      return <EventItem player={player} />

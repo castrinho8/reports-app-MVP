@@ -64,25 +64,25 @@ const Report = React.createClass( {
                         <small><i>{this.state.report.localFouls} - {this.state.report.visitorFouls}</i></small>
                      </div>
                      <p>
-                        <RaisedButton primary={true} label="Events"
+                        <RaisedButton primary={true} label="Eventos"
                             linkButton={true} href={EventsAPI.getEventListUrl(this.state.report.id)} />
                      </p>
                   </div>
                   <hr/>
                   <div style={style.div}>
-                     <RaisedButton style={style.button} label="Goal"
+                     <RaisedButton style={style.button} label="Gol"
                          linkButton={true} href={EventsAPI.getGoalUrl(this.state.report.id)} />
-                     <RaisedButton style={style.button} label="Foul"
+                     <RaisedButton style={style.button} label="Falta"
                          linkButton={true} href={EventsAPI.getFoulUrl(this.state.report.id)} />
                   </div>
                   <div style={style.div}>
-                     <RaisedButton style={style.button} label="Yellow Card"
+                     <RaisedButton style={style.button} label="Tarjeta amarilla"
                          linkButton={true} href={EventsAPI.getYellowCardUrl(this.state.report.id)} />
-                     <RaisedButton style={style.button} label="Red Card"
+                     <RaisedButton style={style.button} label="Tarjeta roja"
                          linkButton={true} href={EventsAPI.getRedCardUrl(this.state.report.id)} />
                   </div>
                   <p>
-                     <RaisedButton primary={true} label="End game"
+                     <RaisedButton primary={true} label="Finalizar partido"
                          linkButton={true} href={EndGameAPI.getEndGameUrl(this.state.report.id)} />
                   </p>
                </div>

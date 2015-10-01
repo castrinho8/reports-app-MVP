@@ -39,7 +39,7 @@ let PlayerCallList = React.createClass( {
 
          return(
             <Card>
-               <CardTitle title={this.state.playerCallList.teamName} subtitle="Call up list"/>
+               <CardTitle title={this.state.playerCallList.teamName} subtitle="Lista de convocados"/>
                <List>
                  { elements }
               </List>

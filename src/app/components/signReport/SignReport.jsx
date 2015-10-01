@@ -27,7 +27,7 @@ let SignReport = React.createClass( {
    },
 
    render: function() {
-       let title = "Sign" + (this.props.teamName ? " - " + this.props.teamName : "")
+       let title = "Firmar" + (this.props.teamName ? " - " + this.props.teamName : "")
       return (
          <div>
             <Dialog ref="signEvent"
@@ -35,11 +35,11 @@ let SignReport = React.createClass( {
              actions={
                  [
                      <FlatButton
-                       label="Cancel"
+                       label="Cancelar"
                        secondary={true}
                        onTouchTap={this.dismissDialog}/>,
                      <FlatButton
-                       label="Submit"
+                       label="Firmar"
                        primary={true}
                        onTouchTap={this._onDialogSubmit}/>
                  ]
@@ -51,7 +51,7 @@ let SignReport = React.createClass( {
                 <DropDownMenu ref="menu" menuItems={this.props.players} />
              </div>
             </Dialog>
-            <RaisedButton label={(this.props.sign!=undefined) ? "Signed report" : "Sign this report"}
+            <RaisedButton label={(this.props.sign!=undefined) ? "Acta firmada" : "Firmar esta acta"}
                 style={this.props.style.signButton}
                 secondary={true} onClick={this.handleClick} disabled={this.props.sign!=undefined}/>
          </div>

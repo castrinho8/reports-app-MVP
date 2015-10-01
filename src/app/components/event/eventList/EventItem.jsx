@@ -53,15 +53,15 @@ let EventItem = React.createClass( {
                   </div>
                }>
                <Dialog ref="removeEvent"
-                title="Remove event"
+                title="Eliminar evento"
                 actions={
                     [
                         <FlatButton
-                          label="Cancel"
+                          label="Cancelar"
                           secondary={true}
                           onTouchTap={this.dismissDialog}/>,
                         <FlatButton
-                          label="Submit"
+                          label="Aceptar"
                           primary={true}
                           onTouchTap={this.onDialogSubmit}/>
                     ]

@@ -59,15 +59,15 @@ let FoulEvent = React.createClass( {
       return (
          <div>
             <Dialog ref="foulEvent"
-             title="Foul"
+             title="Falta"
              actions={
                  [
                      <FlatButton
-                       label="Cancel"
+                       label="Cancelar"
                        secondary={true}
                        onTouchTap={this.dismissDialog}/>,
                      <FlatButton
-                       label="Submit"
+                       label="Aceptar"
                        primary={true}
                        onTouchTap={this._onDialogSubmit}/>
                  ]
@@ -75,10 +75,10 @@ let FoulEvent = React.createClass( {
              actionFocus="submit">
              <hr/>
              <p>
-                 Are you sure to add a foul to {this.props.player.name} number {this.props.player.number}?
+                 ¿Está seguro de añadir una falta a {this.props.player.name} número {this.props.player.number}?
              </p>
              <div>
-                 <h4>Select term</h4>
+                 <h4>Seleccionar parte</h4>
                  <DropDownMenu ref="term" menuItems={options} />
              </div>
             </Dialog>

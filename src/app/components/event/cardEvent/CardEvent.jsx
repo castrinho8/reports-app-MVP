@@ -78,11 +78,11 @@ let CardEvent = React.createClass( {
              actions={
                  [
                      <FlatButton
-                       label="Cancel"
+                       label="Cancelar"
                        secondary={true}
                        onTouchTap={this.dismissDialog}/>,
                      <FlatButton
-                       label="Submit"
+                       label="Aceptar"
                        primary={true}
                        onTouchTap={this._onDialogSubmit}/>
                  ]
@@ -90,10 +90,10 @@ let CardEvent = React.createClass( {
              actionFocus="submit">
              <hr/>
              <p>
-                 Are you sure to add a {eventTexts.text} to {this.props.player.name} number {this.props.player.number}?
+                 ¿Esta seguro de añadir una {eventTexts.text} a {this.props.player.name} número {this.props.player.number}?
              </p>
              <div>
-                 <h4>Select term</h4>
+                 <h4>Seleccionar parte</h4>
                  <DropDownMenu ref="term" menuItems={options} />
              </div>
             </Dialog>
