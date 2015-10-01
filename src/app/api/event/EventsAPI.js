@@ -7,18 +7,6 @@ let EventsAPI = {
         return API.getBaseUrl() + 'report/' + reportId + '/event';
     },
 
-    getEventListAPIUrl: function() {
-        return API.getBaseAPIUrl() + 'event/'
-    },
-
-    getEventAPIUrl: function(eventId) {
-        return API.getBaseAPIUrl() + 'event/' + eventId
-    },
-
-    putEventAPIUrl: function() {
-        return API.getBaseAPIUrl() + 'event/'
-    },
-
     getGoalUrl: function(reportId) {
         return API.getBaseUrl() + 'report/' + reportId + '/event/goal'
     },
@@ -33,6 +21,20 @@ let EventsAPI = {
 
     getRedCardUrl: function(reportId) {
         return API.getBaseUrl() + 'report/' + reportId + '/event/red-card'
+    },
+
+    /* -------------- Events API --------------- */
+
+    getEventListAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'events/'
+    },
+
+    getEventAPIUrl: function(eventId) {
+        return API.getBaseAPIUrl() + 'events/' + eventId
+    },
+
+    putEventAPIUrl: function() {
+        return API.getBaseAPIUrl() + 'events/'
     },
 
 }

@@ -30,6 +30,26 @@ let EventItem = React.createClass( {
     },
 
    render: function() {
+        let typeText = '-';
+        let icon = '';
+        switch (this.props.player.eventType) {
+            case 'goal':
+                typeText = 'Gol';
+                icon = 'fa fa-futbol-o';
+                break;
+            case 'foul':
+                typeText = 'Falta';
+                icon = 'fa fa-gavel';
+                break;
+            case 'yellow-card':
+                typeText = 'Tarjeta amarilla';
+                icon = 'fa fa-sticky-note-o';
+                break;
+            case 'red-card':
+                typeText = 'Tarjeta roja';
+                icon = 'fa fa-sticky-note';
+                break;
+        }
       return (
          <div>
             <ListItem
@@ -42,11 +62,11 @@ let EventItem = React.createClass( {
                }
                secondaryText={
                   <div>
-                     <span style={style.timestamp}>{this.props.player.type}</span>
+                     <span style={style.timestamp}>{typeText}</span>
                   </div>
                }
                secondaryTextLines={2}
-               leftIcon={<IconButton iconClassName={this.props.player.eventIcon}/>}
+               leftIcon={<IconButton iconClassName={icon}/>}
                rightIcon={
                   <div>
                      <IconButton iconClassName="fa fa-trash-o" onClick={this.handleRemove}/>
