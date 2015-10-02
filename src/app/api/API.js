@@ -9,13 +9,12 @@ let API = {
     },
 
     getBaseAPIUrl: function() {
-        return config.backEnd.host + ':' + config.backEnd.port + '/';
+        return config.backEnd.host + ':' + config.backEnd.port + '/' + config.backEnd.api + '/';
     },
 
     get: function(url, callback) {
         request
         .get(url)
-        .set('Access-Control-Allow-Origin', '*')
         .set('Accept', 'application/json')
         .end((err, res) => {
             callback(err, res);
@@ -26,7 +25,6 @@ let API = {
         request
         .put(url)
         .send(params)
-        .set('Access-Control-Allow-Origin', '*')
         .set('Accept', 'application/json')
         .end((err, res) => {
             callback(err, res);
@@ -37,7 +35,6 @@ let API = {
         request
         .post(url)
         .send(params)
-        .set('Access-Control-Allow-Origin', '*')
         .set('Accept', 'application/json')
         .end((err, res) => {
             callback(err, res);
@@ -48,12 +45,21 @@ let API = {
         request
         .del(url)
         .send(params)
-        .set('Access-Control-Allow-Origin', '*')
         .set('Accept', 'application/json')
         .end((err, res) => {
             callback(err, res);
         });
-    }
+    },
+
+    patch: function(url, params, callback) {
+        request
+        .patch(url)
+        .send(params)
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+            callback(err, res);
+        });
+    },
 }
 
 module.exports = API

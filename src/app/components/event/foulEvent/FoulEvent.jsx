@@ -41,20 +41,24 @@ let FoulEvent = React.createClass( {
 
    _onDialogSubmit: function() {
        let reportId = this.props.reportId
+       let playerId = this.props.eventCallUp.player.id
        let index = this.refs.term.state.selectedIndex
        let term = options[index].text
-       let playerParams = {
+/*       let playerParams = {
            id: this.props.player.id,
            name: this.props.player.name,
            number: this.props.player.number,
            teamName: this.props.player.teamName
        }
        EventActions.putFoul(reportId, playerParams, term);
+*/
+       EventActions.submitEvent(reportId, playerId, 'foul', term)
        // Redirect to report page
        window.location = ReportsAPI.getReportUrl(reportId)
    },
 
    render: function() {
+       let playerName = this.props.eventCallUp.player.user.first_name + ' ' + this.props.eventCallUp.player.user.last_name
 
       return (
          <div>
@@ -75,7 +79,7 @@ let FoulEvent = React.createClass( {
              actionFocus="submit">
              <hr/>
              <p>
-                 ¿Está seguro de añadir una falta a {this.props.player.name} número {this.props.player.number}?
+                 ¿Está seguro de añadir una falta a {playerName} número {this.props.eventCallUp.player.playerNumber}?
              </p>
              <div>
                  <h4>Seleccionar parte</h4>
@@ -83,9 +87,9 @@ let FoulEvent = React.createClass( {
              </div>
             </Dialog>
             <ListItem
-               primaryText={ this.props.player.name }
-               secondaryText={ this.props.player.number }
-               leftAvatar={<Avatar src= { this.props.player.avatarUrl } />} onClick={this.showDialog}/>
+               primaryText={playerName }
+               secondaryText={ this.props.eventCallUp.player.playerNumber }
+               leftAvatar={<Avatar src= { this.props.eventCallUp.player.avatarUrl } />} onClick={this.showDialog}/>
          </div>
     )
   }

@@ -6,6 +6,7 @@ let EventActions = Reflux.createActions([
     'putYellowCard',
     'putRedCard',
     'updateEventList',
+    'submitEvent',
     'deleteEvent'
     ]);
 

@@ -4,7 +4,11 @@ import API from '../API.js'
 let ReportsAPI = {
 
     getReportUrl: function(reportId) {
-        return API.getBaseUrl() + 'reports/' + reportId;
+        return API.getBaseUrl() + 'report/' + reportId;
+    },
+
+    getReportListUrl: function() {
+        return API.getBaseUrl() + 'report-list';
     },
 
     getPlayerCallListUrl: function(reportId, teamId) {
@@ -19,6 +23,10 @@ let ReportsAPI = {
 
     getCalledPlayersAPIUrl: function(reportId, teamId) {
         return API.getBaseAPIUrl() + 'reports/' + reportId +  '/calledups/?teamId=' + teamId;
+    },
+
+    postCreateReportAPIUrl: function(matchId) {
+        return API.getBaseAPIUrl() + 'reports/'
     },
 
     postPlayerCallAPIUrl: function(reportId) {

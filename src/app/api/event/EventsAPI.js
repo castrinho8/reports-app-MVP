@@ -3,8 +3,8 @@ import API from '../API.js'
 
 let EventsAPI = {
 
-    getEventListUrl: function(reportId) {
-        return API.getBaseUrl() + 'report/' + reportId + '/event';
+    getEventListUrl: function(reportId, localTeam, visitorTeam) {
+        return API.getBaseUrl() + 'report/' + reportId + '/event/';
     },
 
     getGoalUrl: function(reportId) {

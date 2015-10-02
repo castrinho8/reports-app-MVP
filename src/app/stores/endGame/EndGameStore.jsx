@@ -9,10 +9,32 @@ let EndGameStore = Reflux.createStore({
 
     init: function() {
         this.state = {
-            report: {},
+            report: {
+                id: "",
+                owner:"",
+                match: {
+                    id: "",
+                    localTeam: {
+                        id:"",
+                        teamName: "",
+                        teamObservations:"",
+                        teamManager:""
+                    } ,
+                    visitorTeam: {
+                        id:"",
+                        teamName: "",
+                        teamObservations:"",
+                        teamManager:""
+                    },
+                    report: "",
+                    date: "",
+                    place: ""
+                },
+                issues: ""
+            },
             localPlayers: [],
             visitorPlayers: [],
-            referees: []
+            referees: [{payload: 0, text: 'Árbitro'}]
         };
     },
 
@@ -26,8 +48,8 @@ let EndGameStore = Reflux.createStore({
         API.get(reportUrl, (err, res) => {
             let gameReport = JSON.parse(res.text);
 
-            let localTeamId = gameReport.localTeamId
-            let visitorTeamId = gameReport.visitorTeamId
+            let localTeamId = gameReport.match.localTeam.id
+            let visitorTeamId = gameReport.match.visitorTeam.id
 
             // Update referees list and report
             // TODO CHECK ERRORS
@@ -35,7 +57,7 @@ let EndGameStore = Reflux.createStore({
                     report: gameReport,
                     localPlayers: this.state.localPlayers,
                     visitorPlayers: this.state.visitorPlayers,
-                    referees: gameReport.referees
+                    referees: this.state.referees
             }
             this.state = state
             this.triggerAsync(this.state);
@@ -69,6 +91,7 @@ let EndGameStore = Reflux.createStore({
                 this.state = state
                 this.triggerAsync(this.state);
             });
+        console.log(this.state)
         });
     },
 
@@ -82,7 +105,7 @@ let EndGameStore = Reflux.createStore({
     createList: function(list) {
         let result = []
         list.forEach(function(player, index, array) {
-            result.push({"payload": index, "text": player.name});
+            result.push({"payload": index, "text": player.player.user.first_name + ' ' + player.player.user.last_name});
         })
         return result;
     },
@@ -90,24 +113,15 @@ let EndGameStore = Reflux.createStore({
     onPutIncidences: function(reportId, issues) {
         let url = ReportsAPI.getReportAPIUrl(reportId)
         let params = {"issues": issues}
-        API.put(url, params, function(err, res){
+        API.patch(url, params, function(err, res){
             // TODO CHECK ERRORS
         })
     },
 
-    onSignReport: function(reportId, type, person, callback) {
-        let url = ReportsAPI.getReportAPIUrl(reportId)
-        let params = {}
-        if(type == "referee")
-            params = { "signReferee": person }
-        if(type == "local")
-            params = { "signLocal": person }
-        if(type == "visitor")
-            params = { "signVisitor": person}
+    onEndReport: function() {
+        let url = ""
+        API.post(url, params, function(err, res){
 
-        API.put(url, params, function(err, res){
-            // TODO CHECK ERRORS
-            callback(err, res)
         })
     }
 

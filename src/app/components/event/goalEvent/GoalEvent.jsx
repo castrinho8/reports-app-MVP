@@ -39,25 +39,36 @@ let GoalEvent = React.createClass( {
        this.refs.goalEvent.dismiss();
    },
 
+   componentDidMount: function(){
+     console.log(this.props)
+   },
+
    _onDialogSubmit: function() {
        let reportId = this.props.reportId
+       let playerId = this.props.eventCallUp.player.id
        let index = this.refs.term.state.selectedIndex
        let term = options[index].text
-       let playerParams = {
-           id: this.props.player.id,
-           name: this.props.player.name,
-           number: this.props.player.number,
-           teamName: this.props.player.teamName
+/*       let playerParams = {
+           id: this.props.eventCallUp.player.id,
+           name: this.props.eventCallUp.player.name,
+           number: this.props.eventCallUp.player.number,
+           teamName: this.props.eventCallUp.player.teamName
        }
-       EventActions.putGoal(reportId, playerParams, term);
+*/
+        console.log(reportId, playerId, term)
+       EventActions.submitEvent(reportId, playerId, 'goal', term)
+
+//       EventActions.putGoal(reportId, playerParams, term);
        // Redirect to report page
        window.location = ReportsAPI.getReportUrl(reportId)
    },
 
    render: function() {
 
-      return (
-         <div>
+       let playerName = this.props.eventCallUp.player.user.first_name + ' ' + this.props.eventCallUp.player.user.last_name
+
+       return (
+        <div>
             <Dialog ref="goalEvent"
              title="Gol"
              actions={
@@ -75,7 +86,7 @@ let GoalEvent = React.createClass( {
              actionFocus="submit">
              <hr/>
              <p>
-                 ¿Está seguro de añadir un gol a {this.props.player.name} número {this.props.player.number}?
+                 ¿Está seguro de añadir un gol a {playerName} número {this.props.eventCallUp.player.playerNumber}?
              </p>
              <div>
                  <h4>Seleccionar parte</h4>
@@ -83,9 +94,9 @@ let GoalEvent = React.createClass( {
              </div>
             </Dialog>
             <ListItem
-               primaryText={ this.props.player.name }
-               secondaryText={ this.props.player.number }
-               leftAvatar={<Avatar src= { this.props.player.avatarUrl } />} onClick={this.showDialog}/>
+               primaryText={ playerName }
+               secondaryText={ this.props.eventCallUp.player.playerNumber }
+               leftAvatar={<Avatar src= { this.props.eventCallUp.player.avatarUrl } />} onClick={this.showDialog}/>
          </div>
     )
   }

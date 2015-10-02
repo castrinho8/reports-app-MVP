@@ -1,5 +1,6 @@
 import React from 'react';
 import mui from 'material-ui';
+import ReportsAPI from '../../api/report/ReportsAPI.js'
 
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
 
@@ -38,7 +39,7 @@ let Login = React.createClass( {
                floatingLabelText="Contraseña" />
          </p>
          <p>
-            <FlatButton label="Aceptar" primary={true} />
+            <FlatButton label="Aceptar" linkButton={true} href={ReportsAPI.getReportListUrl()} primary={true} />
          </p>
       </div>
     )

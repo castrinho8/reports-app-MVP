@@ -10,7 +10,29 @@ let PlayerListStore = Reflux.createStore({
         this.state = {
             localList: [],
             visitorList : [],
-            report: {}
+            report: {
+                id: "",
+                owner:"",
+                match: {
+                    id: "",
+                    localTeam: {
+                        id:"",
+                        teamName: "",
+                        teamObservations:"",
+                        teamManager:""
+                    } ,
+                    visitorTeam: {
+                        id:"",
+                        teamName: "",
+                        teamObservations:"",
+                        teamManager:""
+                    },
+                    report: "",
+                    date: "",
+                    place: ""
+                },
+                issues: ""
+            }
         };
     },
 
@@ -58,14 +80,13 @@ let PlayerListStore = Reflux.createStore({
         API.get(url, (err, res) => {
             // Calling the end function will send the request
             let newReport = JSON.parse(res.text);
-            console.log(newReport)
             // TODO CHECK IF THIS IS ONLY ONE ELEMENT
-            let state = {
+            let newstate = {
                     localList: this.state.localList,
                     visitorList: this.state.visitorList,
                     report: newReport
             }
-            this.state = state;
+            this.state = newstate;
             this.triggerAsync(this.state);
             callback(this.state.report)
         });

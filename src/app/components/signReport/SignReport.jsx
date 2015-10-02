@@ -1,6 +1,9 @@
 import React from 'react';
+import Reflux from 'reflux';
 import mui from 'material-ui';
 import ReportActions from '../../actions/report/ReportActions.jsx'
+import EventActions from '../../actions/event/EventActions.jsx'
+import SignStore from '../../stores/signStore/SignStore.jsx'
 
 // Components
 let Dialog = mui.Dialog,
@@ -10,6 +13,11 @@ let Dialog = mui.Dialog,
    FlatButton = mui.FlatButton;
 
 let SignReport = React.createClass( {
+    mixins: [Reflux.connect(SignStore, "sign")],
+
+   dismissDialog: function() {
+       this.refs.signEvent.dismiss()
+   },
 
    handleClick: function() {
       this.refs.signEvent.show()
@@ -17,13 +25,8 @@ let SignReport = React.createClass( {
 
    _onDialogSubmit: function() {
        let reportId = this.props.reportId
-       let type = this.props.type
-       let index = this.refs.menu.state.selectedIndex
-       let person = this.props.players[index]
-       ReportActions.signReport(reportId, type, person.text, (err, res) =>{
-           this.refs.signEvent.dismiss()
-           window.location.reload()
-       })
+       this.refs.signEvent.dismiss()
+       window.location.reload()
    },
 
    render: function() {
@@ -51,9 +54,9 @@ let SignReport = React.createClass( {
                 <DropDownMenu ref="menu" menuItems={this.props.players} />
              </div>
             </Dialog>
-            <RaisedButton label={(this.props.sign!=undefined) ? "Acta firmada" : "Firmar esta acta"}
+            <RaisedButton label={/*(this.props.sign!=undefined) ? "Acta firmada" :*/ "Firmar esta acta"}
                 style={this.props.style.signButton}
-                secondary={true} onClick={this.handleClick} disabled={this.props.sign!=undefined}/>
+                secondary={true} onClick={this.handleClick} disabled={/*this.props.sign!=undefined*/false}/>
          </div>
     )
   }

@@ -31,9 +31,9 @@ let AddEventList = React.createClass( {
     componentWillMount: function() {
         let reportId = this.props.params.reportId
         // Update report
-        ReportActions.updateReportInPlayerList(reportId, function(report) {
-          let localId = report.localTeamId
-          let visitorId = report.visitorTeamId
+        ReportActions.updateReportInPlayerList(reportId, (report) => {
+          let localId = report.match.localTeam.id
+          let visitorId = report.match.visitorTeam.id
           // Update list of players for each team when report is updated
           ReportActions.updatePlayersList(reportId, localId, visitorId)
         })
@@ -42,17 +42,15 @@ let AddEventList = React.createClass( {
    // Select the event depending on the url type
    selectEvent: function(player) {
         let type = this.props.params.type
-        let result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
+        let result = <GoalEvent eventCallUp={player} reportId={this.props.params.reportId}/>
 
-        if(type == 'goal')
-            result = <GoalEvent player={player} reportId={this.props.params.reportId}/>
-        if(type == 'foul')
-            result = <FoulEvent player={player} reportId={this.props.params.reportId}/>
-        if(type == 'yellow-card')
-            result = <CardEvent player={player} type="yellow" reportId={this.props.params.reportId}/>
-        if(type == 'red-card')
-            result = <CardEvent player={player} type="red" reportId={this.props.params.reportId}/>
-
+        let events = {
+            "goal": <GoalEvent eventCallUp={player} reportId={this.props.params.reportId}/>,
+            "foul": <FoulEvent eventCallUp={player} reportId={this.props.params.reportId}/>,
+            "yellow-card": <CardEvent eventCallUp={player} type="yellow" reportId={this.props.params.reportId}/>,
+            "red-card": <CardEvent eventCallUp={player} type="red" reportId={this.props.params.reportId}/>
+        }
+        result = events[type]
         return result
    },
 
@@ -60,7 +58,7 @@ let AddEventList = React.createClass( {
         return (
          <div>
             <Tabs>
-               <Tab label={this.state.playerList.report.localTeam}>
+               <Tab label={this.state.playerList.report.match.localTeam.teamName}>
                   <List>
                      {
                         this.state.playerList.localList.map( player => {
@@ -69,7 +67,7 @@ let AddEventList = React.createClass( {
                      }
                   </List>
                </Tab>
-               <Tab label={this.state.playerList.report.visitorTeam}>
+               <Tab label={this.state.playerList.report.match.visitorTeam.teamName}>
                   <List>
                      {
                         this.state.playerList.visitorList.map( player => {

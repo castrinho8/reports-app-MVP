@@ -21,8 +21,12 @@ let EventItem = React.createClass( {
     },
 
     onDialogSubmit: function() {
-        EventActions.deleteEvent(this.props.player.id)
+        EventActions.deleteEvent(this.props.eventItem.id)
         window.location.reload()
+    },
+
+    componentDidMount: function() {
+        console.log(this.props)
     },
 
     handleRemove: function() {
@@ -32,7 +36,7 @@ let EventItem = React.createClass( {
    render: function() {
         let typeText = '-';
         let icon = '';
-        switch (this.props.player.eventType) {
+        switch (this.props.eventItem.eventType) {
             case 'goal':
                 typeText = 'Gol';
                 icon = 'fa fa-futbol-o';
@@ -50,14 +54,16 @@ let EventItem = React.createClass( {
                 icon = 'fa fa-sticky-note';
                 break;
         }
+
+        let player_name = this.props.eventItem.player.user.first_name + ' ' + this.props.eventItem.player.user.last_name
       return (
          <div>
             <ListItem
                primaryText={
                   <div>
-                  <span>({this.props.player.number}) {this.props.player.name}</span>
+                  <span>({this.props.eventItem.player.playerNumber}) {player_name}</span>
                   <span> - </span>
-                  <span style={style.team}>{ this.props.player.teamName }</span>
+                  <span style={style.team}>{ this.props.eventItem.player.team.teamName }</span>
                   </div>
                }
                secondaryText={

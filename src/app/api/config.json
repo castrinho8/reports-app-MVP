@@ -1,10 +1,21 @@
 {
     "backEnd" : {
         "host": "http://localhost",
-        "port" : "3000",
+        "port" : "8000",
+        "api": "api/0/manager"
     },
     "frontEnd" : {
         "host": "http://localhost",
         "port" : "8080",
-    }
+    },
+    "testing" : {
+        "host": "http://polaris.local",
+        "port" : "8000",
+        "api": "api/0/manager"
+    },
+    "backEnd2" : {
+        "host": "https://beta.torneo.vacmatch.com",
+        "port" : "",
+        "api": "api/0/manager"
+    },
 }

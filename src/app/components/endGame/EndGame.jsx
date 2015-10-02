@@ -5,6 +5,7 @@ import style from './endGameStyle';
 import SignReport from '../signReport/SignReport';
 import EndGameStore from '../../stores/endGame/EndGameStore';
 import ReportActions from '../../actions/report/ReportActions.jsx'
+import EventActions from '../../actions/event/EventActions.jsx'
 
 let ThemeManager = new mui.Styles.ThemeManager();
 
@@ -27,9 +28,7 @@ let EndGame = React.createClass( {
     },
 
     componentWillMount: function() {
-        ReportActions.updateEndGameReport(this.props.params.reportId, function() {
-            console.log(this.state.endGame.referees)
-        })
+        ReportActions.updateEndGameReport(this.props.params.reportId)
     },
 
     _handleIncidencesChange: function(e) {
@@ -47,11 +46,18 @@ let EndGame = React.createClass( {
         this.refs.incidences.setErrorText("Incidencias actualizadas!")
     },
 
+    _handleEndReport: function() {
+        let reportId = this.state.endGame.report.id;
+        let playerId = 1//ARBITRO
+        let term = 2
+        EventActions.submitEvent(reportId, playerId, 'end-match', term)
+    },
+
    render: function() {
       return (
          <div>
             <Tabs>
-               <Tab label="Referee">
+               <Tab label="Árbitro">
                    <div style={style.center}>
                   <p>
                      <TextField
@@ -66,6 +72,9 @@ let EndGame = React.createClass( {
                   <p>
                     <RaisedButton label="Enviar incidencias" primary={true} onClick={this._handleSendIncidences}/>
                   </p>
+                  <p>
+                    <RaisedButton label="Terminar encuentro" primary={true} onClick={this._handleEndReport}/>
+                  </p>
                   </div>
                   <div>
                      <SignReport style={style}
@@ -73,13 +82,13 @@ let EndGame = React.createClass( {
                          sign={this.state.endGame.report.signReferee} type="referee"/>
                   </div>
                </Tab>
-               <Tab label={this.state.endGame.report.localTeam}>
-                  <SignReport style={style} teamName={this.state.endGame.report.localTeam}
+               <Tab label={this.state.endGame.report.match.localTeam.teamName}>
+                  <SignReport style={style} teamName={this.state.endGame.report.match.localTeam.teamName}
                       players={this.state.endGame.localPlayers} reportId={this.state.endGame.report.id}
                       sign={this.state.endGame.report.signLocal} type="local"/>
                </Tab>
-               <Tab label={this.state.endGame.report.visitorTeam}>
-                  <SignReport style={style} teamName={this.state.endGame.report.visitorTeam}
+               <Tab label={this.state.endGame.report.match.visitorTeam.teamName}>
+                  <SignReport style={style} teamName={this.state.endGame.report.match.visitorTeam.teamName}
                       players={this.state.endGame.visitorPlayers} reportId={this.state.endGame.report.id}
                       sign={this.state.endGame.report.signVisitor} type="visitor"/>
                </Tab>

@@ -2,6 +2,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import mui from 'material-ui';
 import ReportsAPI from '../../api/report/ReportsAPI.js'
+import API from '../../api/API.js'
 
 // Styles
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
@@ -14,6 +15,20 @@ let List = mui.List,
 
 let PendingList = React.createClass( {
 
+    onClick: function(matchId) {
+        // POST para crear acta
+        let url = ReportsAPI.postCreateReportAPIUrl(matchId)
+        let param = {
+            owner: "",
+            issuess: "",
+            match: ""
+        }
+        console.log("create report " , url)
+        API.post(url, param, function(err, res) {
+            console.log(err, res)
+        });
+    },
+
     render: function() {
       var content = <p>Loading...</p>
       if (this.props.list) {
@@ -24,6 +39,7 @@ let PendingList = React.createClass( {
                leftAvatar={<Avatar src= { match.localAvatarUrl } />}
                rightAvatar={<Avatar src={ match.localAvatarUrl } />}
                href={ReportsAPI.getReportUrl(match.id)}
+               onClick={this.handleClick(match.id)}
                />
          })
       }
@@ -31,8 +47,8 @@ let PendingList = React.createClass( {
          <List style={coreStyle.center}>
             {content}
          </List>
-    )
+       )
     }
-    });
+});
 
 module.exports = PendingList

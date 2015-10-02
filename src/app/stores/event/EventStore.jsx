@@ -17,75 +17,19 @@ let EventStore = Reflux.createStore({
         return this.state;
     },
 
-    putGoal: function(reportId, playerParams, term) {
-        let playerId = playerParams.id
-        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
+    onSubmitEvent: function(reportId, playerId, eventType, term, description, callback) {
         let params = {
-            "reportId": reportId,
-            "playerId": playerId,
-            "name": playerParams.name,
-            "number": playerParams.number,
-            "teamName": playerParams.teamName,
-            "type": "goal",
+            "report": reportId,
+            "player": playerId,
+            "eventType": eventType,
             "term": term
         }
-        console.log(url, params)
-        API.post(url, params, (err, res) => {
-            // TODO Check errors
-        });
-    },
+        if (description) params.description = description
 
-    putFoul: function(reportId, playerParams, term) {
-        let playerId = playerParams.id
         let url = EventsAPI.putEventAPIUrl(reportId, playerId)
-        let params = {
-            "reportId": reportId,
-            "playerId": playerId,
-            "name": playerParams.name,
-            "number": playerParams.number,
-            "teamName": playerParams.teamName,
-            "type": "foul",
-            "term": term
-        }
-        console.log(url, params)
         API.post(url, params, (err, res) => {
             // TODO Check errors
-        });
-    },
-
-    putYellowCard: function(reportId, playerParams, term) {
-        let playerId = playerParams.id
-        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
-        let params = {
-            "reportId": reportId,
-            "playerId": playerId,
-            "name": playerParams.name,
-            "number": playerParams.number,
-            "teamName": playerParams.teamName,
-            "type": "yellowCard",
-            "term": term
-        }
-        console.log(url, params)
-        API.post(url, params, (err, res) => {
-            // TODO Check errors
-        });
-    },
-
-    putRedCard: function(reportId, playerParams, term) {
-        let playerId = playerParams.id
-        let url = EventsAPI.putEventAPIUrl(reportId, playerId)
-        let params = {
-            "reportId": reportId,
-            "playerId": playerId,
-            "name": playerParams.name,
-            "number": playerParams.number,
-            "teamName": playerParams.teamName,
-            "type": "redCard",
-            "term": term
-        }
-        console.log(url, params)
-        API.post(url, params, (err, res) => {
-            // TODO Check errors
+            if(callback) callback(err, res)
         });
     },
 

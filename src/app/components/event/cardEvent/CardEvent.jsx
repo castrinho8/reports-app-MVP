@@ -41,24 +41,29 @@ let CardEvent = React.createClass( {
 
     _onDialogSubmit: function() {
         let reportId = this.props.reportId
+        let playerId = this.props.eventCallUp.player.id
         let index = this.refs.term.state.selectedIndex
         let term = options[index].text
-        let playerParams = {
+/*        let playerParams = {
             id: this.props.player.id,
             name: this.props.player.name,
             number: this.props.player.number,
             teamName: this.props.player.teamName
         }
+*/
         if(this.props.type == 'yellow')
-            EventActions.putYellowCard(reportId, playerParams, term);
+//            EventActions.putYellowCard(reportId, playerParams, term);
+            EventActions.submitEvent(reportId, playerId, 'yellow-card', term)
         if(this.props.type == 'red')
-            EventActions.putRedCard(reportId, playerParams, term);
+            EventActions.submitEvent(reportId, playerId, 'red-card', term)
+//            EventActions.putRedCard(reportId, playerParams, term);
 
         // Redirect to report page
         window.location = ReportsAPI.getReportUrl(reportId)
     },
 
    render: function() {
+       let playerName = this.props.eventCallUp.player.user.first_name + ' ' + this.props.eventCallUp.player.user.last_name
        let eventTexts;
        if(this.props.type == 'yellow')
            eventTexts = {
@@ -90,7 +95,7 @@ let CardEvent = React.createClass( {
              actionFocus="submit">
              <hr/>
              <p>
-                 ¿Esta seguro de añadir una {eventTexts.text} a {this.props.player.name} número {this.props.player.number}?
+                 ¿Esta seguro de añadir una {eventTexts.text} a {playerName} número {this.props.eventCallUp.player.playerNumber}?
              </p>
              <div>
                  <h4>Seleccionar parte</h4>
@@ -98,9 +103,9 @@ let CardEvent = React.createClass( {
              </div>
             </Dialog>
             <ListItem
-               primaryText={ this.props.player.name }
-               secondaryText={ this.props.player.number }
-               leftAvatar={<Avatar src= { this.props.player.avatarUrl } />} onClick={this.showDialog}/>
+               primaryText={ playerName }
+               secondaryText={ this.props.eventCallUp.player.playerNumber }
+               leftAvatar={<Avatar src= { this.props.eventCallUp.player.avatarUrl } />} onClick={this.showDialog}/>
          </div>
     )
   }
