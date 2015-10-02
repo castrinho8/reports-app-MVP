@@ -23,13 +23,26 @@ let SignReport = React.createClass( {
       this.refs.signEvent.show()
    },
 
-   _onDialogSubmit: function() {
-       let reportId = this.props.reportId
-       this.refs.signEvent.dismiss()
-       window.location.reload()
+   getInitialState: function() {
+      return { 'signed': false }
    },
 
+   _onDialogSubmit: function() {
+       let reportId = this.props.reportId
+       console.log(
+        this.refs.menu.props.menuItems,
+        this.refs.menu.state.selectedIndex)
+
+       let signerId = this.refs.menu.props.menuItems[this.refs.menu.state.selectedIndex].id
+
+       ReportActions.signReport(reportId, signerId, (ev) => {
+              this.refs.signEvent.dismiss()
+              this.setState({'signed': true})
+       })
+  },
+
    render: function() {
+      var self = this;
        let title = "Firmar" + (this.props.teamName ? " - " + this.props.teamName : "")
       return (
          <div>
@@ -40,11 +53,11 @@ let SignReport = React.createClass( {
                      <FlatButton
                        label="Cancelar"
                        secondary={true}
-                       onTouchTap={this.dismissDialog}/>,
+                       onTouchTap={self.dismissDialog}/>,
                      <FlatButton
                        label="Firmar"
                        primary={true}
-                       onTouchTap={this._onDialogSubmit}/>
+                       onTouchTap={self._onDialogSubmit}/>
                  ]
              }
              actionFocus="submit"
@@ -54,9 +67,9 @@ let SignReport = React.createClass( {
                 <DropDownMenu ref="menu" menuItems={this.props.players} />
              </div>
             </Dialog>
-            <RaisedButton label={/*(this.props.sign!=undefined) ? "Acta firmada" :*/ "Firmar esta acta"}
+            <RaisedButton label={(this.state.signed) ? "Acta firmada" : "Firmar esta acta"}
                 style={this.props.style.signButton}
-                secondary={true} onClick={this.handleClick} disabled={/*this.props.sign!=undefined*/false}/>
+                secondary={true} onClick={this.handleClick} disabled={this.state.signed}/>
          </div>
     )
   }

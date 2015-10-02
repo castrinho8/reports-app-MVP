@@ -3,6 +3,7 @@ import ReportActions from '../../actions/report/ReportActions';
 import API from '../../api/API.js';
 import ReportsAPI from '../../api/report/ReportsAPI.js';
 import TeamAPI from '../../api/team/TeamAPI.js';
+import UserAPI from '../../api/userAPI.js';
 
 let EndGameStore = Reflux.createStore({
     listenables: [ReportActions],
@@ -34,7 +35,7 @@ let EndGameStore = Reflux.createStore({
             },
             localPlayers: [],
             visitorPlayers: [],
-            referees: [{payload: 0, text: 'Árbitro'}]
+            referees: [{payload: 0, id: UserAPI.getUser().id, text: 'Árbitro'}]
         };
     },
 
@@ -105,7 +106,10 @@ let EndGameStore = Reflux.createStore({
     createList: function(list) {
         let result = []
         list.forEach(function(player, index, array) {
-            result.push({"payload": index, "text": player.player.user.first_name + ' ' + player.player.user.last_name});
+            result.push({
+            "payload": index,
+            "id": player.player.user.id,
+            "text": player.player.user.first_name + ' ' + player.player.user.last_name});
         })
         return result;
     },

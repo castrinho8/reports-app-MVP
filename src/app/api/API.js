@@ -1,6 +1,6 @@
 import config from './config.json'
 import request from 'superagent';
-
+import UserAPI from './userAPI.js';
 
 let API = {
 
@@ -9,7 +9,9 @@ let API = {
     },
 
     getBaseAPIUrl: function() {
-        return config.backEnd.host + ':' + config.backEnd.port + '/' + config.backEnd.api + '/';
+	let apiConfig = config[config._api];
+        return apiConfig.host + ':' + apiConfig.port + apiConfig.api + '/';
+
     },
 
     get: function(url, callback) {
@@ -26,6 +28,7 @@ let API = {
         .put(url)
         .send(params)
         .set('Accept', 'application/json')
+        .set('Authorization', 'Token ' + UserAPI.getUser().token)
         .end((err, res) => {
             callback(err, res);
         });
@@ -36,6 +39,7 @@ let API = {
         .post(url)
         .send(params)
         .set('Accept', 'application/json')
+        .set('Authorization', 'Token ' + UserAPI.getUser().token)
         .end((err, res) => {
             callback(err, res);
         });
@@ -46,6 +50,7 @@ let API = {
         .del(url)
         .send(params)
         .set('Accept', 'application/json')
+        .set('Authorization', 'Token ' + UserAPI.getUser().token)
         .end((err, res) => {
             callback(err, res);
         });
@@ -56,6 +61,7 @@ let API = {
         .patch(url)
         .send(params)
         .set('Accept', 'application/json')
+        .set('Authorization', 'Token ' + UserAPI.getUser().token)
         .end((err, res) => {
             callback(err, res);
         });

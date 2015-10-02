@@ -1,6 +1,7 @@
 import React from 'react';
 import mui from 'material-ui';
 import ReportsAPI from '../../api/report/ReportsAPI.js'
+import UserAPI from '../../api/userAPI.js'
 
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
 
@@ -22,6 +23,13 @@ let Login = React.createClass( {
      };
    },
 
+   handleLogin: function() {
+    UserAPI.authenticate(this.refs.username.state.hasValue, this.refs.password.state.hasValue, (cb => {
+      console.log("got callback", cb);
+      window.location = ReportsAPI.getReportListUrl()
+      }))
+   },
+
   render() {
       return (
       <div style={coreStyle.center}>
@@ -31,15 +39,17 @@ let Login = React.createClass( {
          <p>
             <TextField
                label="User"
+               ref="username"
                floatingLabelText="Usuario" />
          </p>
          <p>
             <TextField
+              ref="password"
                label="Password"
                floatingLabelText="Contraseña" />
          </p>
          <p>
-            <FlatButton label="Aceptar" linkButton={true} href={ReportsAPI.getReportListUrl()} primary={true} />
+            <FlatButton label="Aceptar" linkButton={true} onClick={this.handleLogin} primary={true} />
          </p>
       </div>
     )

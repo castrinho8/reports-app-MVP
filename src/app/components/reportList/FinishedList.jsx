@@ -18,8 +18,9 @@ let FinishedList = React.createClass( {
         var content = <p>Loading...</p>
         if (this.props.list) {
         content = this.props.list.map( match => {
+        console.log(match)
            return <ListItem class="list-center"
-             primaryText={ match.local + ' - ' + match.visitor }
+             primaryText={ match.localTeam.teamName + ' - ' + match.visitorTeam.teamName }
              secondaryText={ match.localResult + ' - ' + match.visitorResult }
              leftAvatar={<Avatar src= { match.localAvatarUrl } />}
              rightAvatar={<Avatar src={ match.localAvatarUrl } />}

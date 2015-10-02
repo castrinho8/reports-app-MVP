@@ -11,10 +11,10 @@ var del = require('del')
 gulp.task('server', function() {
   gulp.src('./build')
     .pipe(webserver({
-      host: '0.0.0.0',
+      host: '127.0.0.1',
       port: 8080,
       fallback: 'index.html',
-      livereload: true
+      livereload: false
     }))
 })
 

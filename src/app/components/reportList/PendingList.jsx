@@ -3,6 +3,7 @@ import Reflux from 'reflux';
 import mui from 'material-ui';
 import ReportsAPI from '../../api/report/ReportsAPI.js'
 import API from '../../api/API.js'
+import UserAPI from '../../api/userAPI.js'
 
 // Styles
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
@@ -15,13 +16,13 @@ let List = mui.List,
 
 let PendingList = React.createClass( {
 
-    onClick: function(matchId) {
+    handleClick: function(matchId) {
         // POST para crear acta
         let url = ReportsAPI.postCreateReportAPIUrl(matchId)
         let param = {
-            owner: "",
-            issuess: "",
-            match: ""
+            owner: UserAPI.getUser().id,
+            issues: "",
+            match: matchId
         }
         console.log("create report " , url)
         API.post(url, param, function(err, res) {
@@ -33,13 +34,19 @@ let PendingList = React.createClass( {
       var content = <p>Loading...</p>
       if (this.props.list) {
          content = this.props.list.map( match => {
+          var onClick;
+          if (match.report) {
+            onClick = (ev) => {}
+          } else {
+            onClick = (ev) => this.handleClick(match.id)
+          }
             return <ListItem class="list-center"
-               primaryText={match.local + ' - ' + match.visitor}
-               secondaryText={ match.time + ' - ' + match.place }
+               primaryText={match.localTeam.teamName + ' - ' + match.visitorTeam.teamName}
+               secondaryText={ match.date + ' - ' + match.place }
                leftAvatar={<Avatar src= { match.localAvatarUrl } />}
                rightAvatar={<Avatar src={ match.localAvatarUrl } />}
                href={ReportsAPI.getReportUrl(match.id)}
-               onClick={this.handleClick(match.id)}
+               onClick={(ev) => this.handleClick(match.id)}
                />
          })
       }

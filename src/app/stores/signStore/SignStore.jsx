@@ -6,12 +6,11 @@ import SignAPI from '../../api/sign/SignAPI.js';
 let SignStore = Reflux.createStore({
     listenables: [ReportActions],
 
-    onSignReport: function(reportId, signerId, date, callback) {
+    onSignReport: function(reportId, signerId, callback) {
         let url = SignAPI.getSignAPIUrl()
         let params = {
             report: reportId,
-            signer: signerId,
-            date: ""
+            signer: signerId
         }
 
         API.post(url, params, function(err, res){

@@ -38,11 +38,11 @@ let ReportsAPI = {
     },
 
     getNextGamesAPIUrl: function() {
-        return API.getBaseAPIUrl() + 'nextmatch';
+        return API.getBaseAPIUrl() + 'matches/unfinished/';
     },
 
     getFinishedGamesAPIUrl: function() {
-        return API.getBaseAPIUrl() + 'finishedmatch';
+        return API.getBaseAPIUrl() + 'matches/finished/';
     }
 
 }
