@@ -21,6 +21,10 @@ let ReportsAPI = {
         return API.getBaseAPIUrl() + 'reports/' + reportId + '/';
     },
 
+    getReportIdAPIUrl: function(matchId) {
+        return API.getBaseAPIUrl() + 'reports/' + matchId + '/';
+    },
+
     getSummaryAPIUrl: function(reportId) {
         return API.getBaseAPIUrl() + 'reports/' + reportId + '/event_summary/';
     },

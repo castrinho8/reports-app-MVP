@@ -25,8 +25,8 @@ let EventsAPI = {
 
     /* -------------- Events API --------------- */
 
-    getEventListAPIUrl: function() {
-        return API.getBaseAPIUrl() + 'events/'
+    getEventListAPIUrl: function(reportId) {
+        return API.getBaseAPIUrl() + 'reports/' + reportId + '/events/'
     },
 
     getEventAPIUrl: function(eventId) {

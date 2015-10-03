@@ -5,11 +5,16 @@
         "api": "/api/0/manager"
     },
     "frontEnd" : {
-        "host": "http://localhost",
+        "host": "http://192.168.43.26",
         "port" : "8080",
     },
+    "beta" : {
+        "host": "https://beta.torneo.vacmatch.com",
+        "port" : "443",
+        "api": "/api/0/manager"
+    },
     "testing" : {
-        "host": "http://127.0.0.1",
+        "host": "http://192.168.43.26",
         "port" : "8000",
         "api": "/api/0/manager"
     },
