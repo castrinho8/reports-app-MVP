@@ -46,6 +46,7 @@ let Login = React.createClass( {
             <TextField
               ref="password"
                label="Password"
+               type="password"
                floatingLabelText="Contraseña" />
          </p>
          <p>

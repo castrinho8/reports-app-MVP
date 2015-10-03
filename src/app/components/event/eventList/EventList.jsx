@@ -45,19 +45,30 @@ let EventList = React.createClass( {
 
     componentWillMount: function() {
         EventActions.updateEventList(this.props.params.reportId)
-    //    ReportActions.updatePlayersList(this.props.params.reportId, this.props.params.localTeam, this.props.params.visitorTeam)
     },
 
+    componentDidMount: function() {
+        console.log("State ", this.state)
+    },
   render: function() {
 
       return (
          <div>
             <List subheader="Segunda parte">
                {
-                  this.state.eventStore.firstTermEvents.map( eventItem => {
+                  this.state.eventStore.secondTermEvents.map( eventItem => {
 
                      let player = this.state.players.filter(player => player.id == eventItem.player)[0]
 
+                     if(!player) player={
+                         user: {
+                             first_name: "",
+                             last_name: ""
+                         },
+                         team: {
+                             teamName: ""
+                         }
+                     }
                       let evt = {
                           id: eventItem.id,
                           eventType: eventItem.eventType,
@@ -74,9 +85,18 @@ let EventList = React.createClass( {
             <ListDivider />
             <List subheader="Primera parte">
                {
-                  this.state.eventStore.secondTermEvents.map( eventItem => {
+                  this.state.eventStore.firstTermEvents.map( eventItem => {
 
                       let player = this.state.players.filter(player => player.id == eventItem.player)[0]
+                      if(!player) player={
+                          user: {
+                              first_name: "",
+                              last_name: ""
+                          },
+                          team: {
+                              teamName: ""
+                          }
+                      }
 
                       let evt = {
                           id: eventItem.id,

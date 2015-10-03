@@ -3,7 +3,7 @@ import API from '../API.js'
 
 let EventsAPI = {
 
-    getEventListUrl: function(reportId, localTeam, visitorTeam) {
+    getEventListUrl: function(reportId) {
         return API.getBaseUrl() + 'report/' + reportId + '/event/';
     },
 
@@ -30,7 +30,7 @@ let EventsAPI = {
     },
 
     getEventAPIUrl: function(eventId) {
-        return API.getBaseAPIUrl() + 'events/' + eventId
+        return API.getBaseAPIUrl() + 'events/' + eventId + '/'
     },
 
     putEventAPIUrl: function() {

@@ -50,11 +50,12 @@ let EventStore = Reflux.createStore({
         });
     },
 
-    onDeleteEvent: function(eventId) {
+    onDeleteEvent: function(eventId, callback) {
         let url = EventsAPI.getEventAPIUrl(eventId)
         let params = {}
         console.log(url)
         API.delete(url, params, function(err, res) {
+            callback(err, res)
         });
     }
 });

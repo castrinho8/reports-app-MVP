@@ -21,12 +21,10 @@ let EventItem = React.createClass( {
     },
 
     onDialogSubmit: function() {
-        EventActions.deleteEvent(this.props.eventItem.id)
-        window.location.reload()
-    },
-
-    componentDidMount: function() {
-        console.log(this.props)
+        EventActions.deleteEvent(this.props.eventItem.id, (err, res) =>{
+            this.dismissDialog
+            window.location.reload()
+        })
     },
 
     handleRemove: function() {
@@ -52,6 +50,10 @@ let EventItem = React.createClass( {
             case 'red-card':
                 typeText = 'Tarjeta roja';
                 icon = 'fa fa-sticky-note';
+                break;
+            case 'end-match':
+                typeText = 'Final del partido';
+                icon = 'fa fa-check-square';
                 break;
         }
 

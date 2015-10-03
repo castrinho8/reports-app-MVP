@@ -2,7 +2,7 @@ import React from 'react';
 import Reflux from 'reflux';
 import mui from 'material-ui';
 import ReportsAPI from '../../api/report/ReportsAPI.js'
-
+import ReportActions from '../../actions/report/ReportActions'
 // Styles
 let coreStyle = require('../../../assets/componentStyle/coreStyle.js')
 
@@ -18,14 +18,13 @@ let FinishedList = React.createClass( {
         var content = <p>Loading...</p>
         if (this.props.list) {
         content = this.props.list.map( match => {
-        console.log(match)
-           return <ListItem class="list-center"
-             primaryText={ match.localTeam.teamName + ' - ' + match.visitorTeam.teamName }
-             secondaryText={ match.localResult + ' - ' + match.visitorResult }
-             leftAvatar={<Avatar src= { match.localAvatarUrl } />}
-             rightAvatar={<Avatar src={ match.localAvatarUrl } />}
-             href={ReportsAPI.getReportUrl(match.id)}
-             />
+            return <ListItem class="list-center"
+              primaryText={ match.localTeam.teamName + ' - ' + match.visitorTeam.teamName }
+              secondaryText=""
+              leftAvatar={<Avatar src= { match.localAvatarUrl } />}
+              rightAvatar={<Avatar src={ match.localAvatarUrl } />}
+              href={ReportsAPI.getReportUrl(match.id)}
+              />
         })
         }
         return (

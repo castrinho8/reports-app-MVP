@@ -21,6 +21,10 @@ let ReportsAPI = {
         return API.getBaseAPIUrl() + 'reports/' + reportId + '/';
     },
 
+    getSummaryAPIUrl: function(reportId) {
+        return API.getBaseAPIUrl() + 'reports/' + reportId + '/event_summary/';
+    },
+
     getCalledPlayersAPIUrl: function(reportId, teamId) {
         return API.getBaseAPIUrl() + 'reports/' + reportId +  '/calledups/?teamId=' + teamId;
     },
